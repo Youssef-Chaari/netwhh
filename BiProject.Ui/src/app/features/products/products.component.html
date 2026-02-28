@@ -1,0 +1,251 @@
+<div class="min-h-screen bg-[var(--color-bg)] text-white p-6 relative overflow-hidden">
+
+    <!-- MAIN CONTENT -->
+    <main class="mt-8 max-w-7xl mx-auto relative z-10">
+        <div class="flex flex-col gap-8">
+
+            <!-- HEADER -->
+            <div class="flex justify-between items-end border-b border-gray-800 pb-4">
+                <div>
+                    <h2 class="text-3xl font-bold font-mono text-white tracking-widest"><span
+                            class="text-[var(--color-neon-magenta)]">PROD</span>_CATALOG</h2>
+                    <p class="text-[var(--color-neon-cyan)] text-xs font-mono tracking-widest uppercase mt-1">System:
+                        BiProject_Oltp_V3 // Live Data Feed</p>
+                </div>
+
+                <button *ngIf="isAdmin" (click)="toggleForm()"
+                    class="px-4 py-2 text-xs font-mono border border-[var(--color-neon-cyan)] text-[var(--color-neon-cyan)] hover:bg-[var(--color-neon-cyan)] hover:text-black transition-all">
+                    <span *ngIf="!showForm">[+] INITIALIZE NEW PRODUCT</span>
+                    <span *ngIf="showForm">[-] ABORT INITIALIZATION</span>
+                </button>
+            </div>
+
+            <!-- ERROR ALERT -->
+            <div *ngIf="error"
+                class="bg-red-500/10 border border-red-500 text-red-500 p-4 rounded font-mono text-sm animate-fade-in">
+                ⚠ {{ error }}
+            </div>
+
+            <!-- FORM PANEL -->
+            <div *ngIf="showForm && isAdmin"
+                class="glass-panel p-6 animate-fade-in border-l-4 border-l-[var(--color-neon-cyan)] bg-black/40 backdrop-blur">
+                <h3
+                    class="text-sm font-mono text-[var(--color-neon-cyan)] uppercase tracking-widest mb-6 border-b border-gray-800 pb-2">
+                    {{ editingId ? 'RECONFIGURE ENTITY' : 'GENERATE NEW ENTITY' }}
+                </h3>
+
+                <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Code -->
+                        <div class="flex flex-col gap-1">
+                            <label
+                                class="text-[10px] text-[var(--color-neon-magenta)] font-mono tracking-widest uppercase">Identifier
+                                (CODE)</label>
+                            <input type="text" formControlName="productCode"
+                                class="w-full bg-black/50 border border-gray-700 text-white p-2 text-sm font-mono focus:border-[var(--color-neon-cyan)] outline-none"
+                                placeholder="e.g. BK-R93R-62" />
+                        </div>
+
+                        <!-- Name -->
+                        <div class="flex flex-col gap-1">
+                            <label
+                                class="text-[10px] text-[var(--color-neon-magenta)] font-mono tracking-widest uppercase">Designation</label>
+                            <input type="text" formControlName="name"
+                                class="w-full bg-black/50 border border-gray-700 text-white p-2 text-sm font-mono focus:border-[var(--color-neon-cyan)] outline-none"
+                                placeholder="Product Name" />
+                        </div>
+
+                        <!-- Price -->
+                        <div class="flex flex-col gap-1">
+                            <label
+                                class="text-[10px] text-[var(--color-neon-magenta)] font-mono tracking-widest uppercase">Credit
+                                Value ($)</label>
+                            <input type="number" formControlName="price"
+                                class="w-full bg-black/50 border border-gray-700 text-white p-2 text-sm font-mono focus:border-[var(--color-neon-cyan)] outline-none" />
+                        </div>
+
+                        <!-- Category -->
+                        <div class="flex flex-col gap-1">
+                            <label
+                                class="text-[10px] text-[var(--color-neon-magenta)] font-mono tracking-widest uppercase">Classification</label>
+                            <select formControlName="categoryId"
+                                class="w-full bg-black/50 border border-gray-700 text-white p-2 text-sm font-mono focus:border-[var(--color-neon-cyan)] outline-none appearance-none">
+                                <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+                            </select>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="flex flex-col gap-1 md:col-span-2">
+                            <label
+                                class="text-[10px] text-[var(--color-neon-magenta)] font-mono tracking-widest uppercase">Entity
+                                Description</label>
+                            <textarea formControlName="description" rows="3"
+                                class="w-full bg-black/50 border border-gray-700 text-white p-2 text-sm font-mono focus:border-[var(--color-neon-cyan)] outline-none resize-none"
+                                placeholder="Provide detailed specifications..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 flex justify-end">
+                        <button type="submit" [disabled]="productForm.invalid"
+                            class="px-6 py-2 border border-[var(--color-neon-magenta)] text-[var(--color-neon-magenta)] hover:bg-[var(--color-neon-magenta)] hover:text-black transition-all font-mono text-xs disabled:opacity-50 disabled:cursor-not-allowed">
+                            [ EXECUTE SEQUENCE ]
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- DATA OVERVIEW LAYER -->
+            <div class="glass-panel overflow-hidden bg-black/40 backdrop-blur border border-gray-800">
+
+                <!-- Loading State -->
+                <div *ngIf="loading" class="p-12 flex flex-col items-center justify-center gap-4">
+                    <div
+                        class="w-12 h-12 border-2 border-t-[var(--color-neon-cyan)] border-r-transparent border-b-[var(--color-neon-magenta)] border-l-transparent rounded-full animate-spin">
+                    </div>
+                    <div class="font-mono text-xs text-[var(--color-neon-cyan)] tracking-[0.2em] animate-pulse">
+                        ESTABLISHING UPLINK...</div>
+                </div>
+
+                <!-- Data Table for Admin -->
+                <div *ngIf="!loading && isAdmin" class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-[800px]">
+                        <thead>
+                            <tr
+                                class="bg-black/60 border-b border-gray-800 text-[10px] font-mono text-gray-500 tracking-widest uppercase">
+                                <th class="p-4 font-medium">CODE</th>
+                                <th class="p-4 font-medium">DESIGNATION</th>
+                                <th class="p-4 font-medium">CATEGORY</th>
+                                <th class="p-4 font-medium text-right">CREDITS</th>
+                                <th class="p-4 font-medium text-center" *ngIf="isAdmin">ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of products"
+                                class="border-b border-gray-800/50 hover:bg-white/5 transition-colors group">
+                                <td class="p-4">
+                                    <span
+                                        class="font-mono text-xs text-[var(--color-neon-cyan)] group-hover:text-white transition-colors">{{
+                                        product.productCode }}</span>
+                                </td>
+                                <td class="p-4 text-gray-200 font-medium">
+                                    {{ product.name }}
+                                </td>
+                                <td class="p-4">
+                                    <span
+                                        class="px-2 py-1 text-[10px] font-mono border border-gray-700 bg-gray-900 text-gray-400 rounded group-hover:border-[var(--color-neon-magenta)] group-hover:text-[var(--color-neon-magenta)] transition-colors">
+                                        {{ product.categoryName }}
+                                    </span>
+                                </td>
+                                <td class="p-4 text-right">
+                                    <div class="font-mono text-[var(--color-neon-magenta)] font-bold">${{ product.price
+                                        | number:'1.2-2' }}</div>
+                                </td>
+                                <td class="p-4 text-center" *ngIf="isAdmin">
+                                    <div class="flex items-center justify-center gap-3">
+                                        <button (click)="toggleForm(product)"
+                                            class="text-[var(--color-neon-cyan)] hover:text-white transition-colors"
+                                            title="Reconfigure">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                                            </svg>
+                                        </button>
+                                        <button (click)="deleteProduct(product.id)"
+                                            class="text-red-500 hover:text-red-400 transition-colors"
+                                            title="Purge Record">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="products.length === 0">
+                                <td [attr.colspan]="isAdmin ? 5 : 4"
+                                    class="p-8 text-center text-gray-500 font-mono text-xs tracking-widest">
+                                    NO_ACTIVE_CATALOG_DATA_FOUND
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- User Grid View / Shopping Experience -->
+                <div *ngIf="!loading && !isAdmin" class="p-8">
+
+                    <div class="flex justify-between items-end mb-8 border-b border-gray-800 pb-4">
+                        <h3 class="text-xl font-mono text-white tracking-widest">AVAILABLE_IMPLANTS</h3>
+
+                        <!-- Cart Summary -->
+                        <div class="flex items-center gap-4 bg-black/60 p-3 border border-gray-800 rounded">
+                            <div class="text-xs font-mono text-gray-400">
+                                ACTIVE CART: <span class="text-[var(--color-neon-cyan)]">{{ cart.length }} UNITS</span>
+                            </div>
+                            <div class="text-sm font-mono text-[var(--color-neon-magenta)] font-bold">
+                                ${{ cartTotal | number:'1.2-2' }}
+                            </div>
+                            <button *ngIf="cart.length > 0" (click)="checkout()"
+                                class="ml-4 px-4 py-1.5 bg-[var(--color-neon-cyan)] text-black text-xs font-bold font-mono hover:bg-white transition-colors">
+                                CHECKOUT
+                            </button>
+                        </div>
+                    </div>
+
+                    <div *ngIf="orderStatus"
+                        class="mb-6 p-3 bg-[var(--color-neon-cyan)]/10 border border-[var(--color-neon-cyan)] text-[var(--color-neon-cyan)] font-mono text-sm text-center animate-pulse">
+                        {{ orderStatus }}
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        <div *ngFor="let product of products"
+                            class="glass-panel border border-gray-800 hover:border-[var(--color-neon-cyan)] transition-colors group relative overflow-hidden bg-black/40 p-5 flex flex-col h-full">
+                            <!-- Glow effect on hover -->
+                            <div
+                                class="absolute -inset-1 bg-gradient-to-r from-[var(--color-neon-cyan)] to-[var(--color-neon-magenta)] rounded-lg blur opacity-0 group-hover:opacity-20 transition duration-1000 group-hover:duration-200">
+                            </div>
+
+                            <div class="relative z-10 flex flex-col h-full">
+                                <div class="flex justify-between items-start mb-4">
+                                    <span
+                                        class="px-2 py-1 text-[9px] font-mono border border-gray-700 bg-gray-900 text-[var(--color-neon-cyan)] rounded tracking-widest">
+                                        {{ product.categoryName }}
+                                    </span>
+                                    <span class="text-xs font-mono text-gray-500">{{ product.productCode }}</span>
+                                </div>
+
+                                <h4
+                                    class="text-lg font-bold text-white mb-2 group-hover:text-[var(--color-neon-cyan)] transition-colors">
+                                    {{ product.name }}</h4>
+
+                                <p class="text-sm text-gray-400 flex-grow mb-6 line-clamp-3">{{ product.description ||
+                                    'No data stream available for this entity.' }}</p>
+
+                                <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-800/50">
+                                    <div class="text-xl font-mono text-[var(--color-neon-magenta)] font-bold">${{
+                                        product.price | number:'1.2-2' }}</div>
+                                    <button (click)="addToOrder(product)"
+                                        class="p-2 border border-gray-600 rounded text-gray-400 hover:text-[var(--color-neon-cyan)] hover:border-[var(--color-neon-cyan)] transition-all"
+                                        title="Add to Cart">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="products.length === 0"
+                            class="col-span-full p-8 text-center text-gray-500 font-mono text-xs tracking-widest">
+                            NO_ACTIVE_CATALOG_DATA_FOUND
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>

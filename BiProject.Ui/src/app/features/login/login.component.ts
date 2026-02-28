@@ -1,0 +1,140 @@
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-login',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
+  template: `
+    <div class="min-h-[80vh] flex items-center justify-center relative">
+      <!-- Decorative background elements specific to login -->
+      <div class="absolute w-full h-full overflow-hidden z-[-1] pointer-events-none flex justify-center items-center">
+        <div class="w-[800px] h-[800px] border border-[var(--color-neon-cyan)]/20 rounded-full animate-[spin_60s_linear_infinite] absolute"></div>
+        <div class="w-[600px] h-[600px] border border-[var(--color-neon-magenta)]/20 rounded-full animate-[spin_40s_linear_infinite_reverse] absolute"></div>
+        
+        <!-- Grid lines -->
+        <div class="absolute inset-0" style="background-image: linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px); background-size: 50px 50px; transform: perspective(500px) rotateX(60deg) translateY(100px) translateZ(-200px);"></div>
+      </div>
+
+      <div class="glass-panel w-full max-w-md p-10 relative overflow-hidden group">
+        <!-- Cyperpunk accent top line -->
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[var(--color-neon-cyan)] to-[var(--color-neon-magenta)]"></div>
+        
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-mono font-bold text-white mb-2 tracking-widest uppercase">
+            System <span class="neon-text-cyan">Login</span>
+          </h2>
+          <p class="text-gray-400 text-sm tracking-widest font-mono">AUTHORIZED PERSONNEL ONLY</p>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6">
+          
+          <div class="relative">
+            <label class="label-futuristic group-focus-within:text-white transition-colors duration-300">Identifiant</label>
+            <div class="relative flex items-center">
+              <span class="absolute left-3 text-[var(--color-neon-cyan)]">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                </svg>
+              </span>
+              <input type="text" formControlName="username" class="input-futuristic pl-10" placeholder="Entrez votre nom d'utilisateur" autocomplete="off">
+            </div>
+            <div *ngIf="submitted && f['username'].errors" class="text-red-500 text-xs mt-1 font-mono">
+              <div *ngIf="f['username'].errors['required']">L'identifiant est requis</div>
+            </div>
+          </div>
+
+          <div class="relative">
+            <label class="label-futuristic group-focus-within:text-white transition-colors duration-300">Mot de passe</label>
+            <div class="relative flex items-center">
+              <span class="absolute left-3 text-[var(--color-neon-magenta)]">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                </svg>
+              </span>
+              <input type="password" formControlName="password" class="input-futuristic pl-10 focus:border-[var(--color-neon-magenta)] focus:ring-[var(--color-neon-magenta)]" placeholder="Entrez votre mot de passe">
+            </div>
+            <div *ngIf="submitted && f['password'].errors" class="text-red-500 text-xs mt-1 font-mono">
+              <div *ngIf="f['password'].errors['required']">Le mot de passe est requis</div>
+            </div>
+          </div>
+
+          <div *ngIf="error" class="bg-red-900/40 border border-red-500 p-3 rounded text-red-300 text-sm font-mono text-center shadow-[0_0_10px_rgba(239,68,68,0.3)]">
+            {{ error }}
+          </div>
+
+          <button type="submit" [disabled]="loading" class="btn-neon w-full flex justify-center py-3 text-lg mt-8 group relative">
+            <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-[var(--color-neon-cyan)] to-[var(--color-neon-magenta)] opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
+            
+            <span *ngIf="loading" class="flex items-center">
+              <svg class="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              AUTHENTICATING...
+            </span>
+            <span *ngIf="!loading">INITIALIZE CONNECTION</span>
+          </button>
+        </form>
+
+        <div class="mt-8 text-center text-sm font-mono text-gray-400">
+            NO ACCESS CLEARANCE? <a href="/register" class="text-[var(--color-neon-magenta)] hover:text-white hover:underline transition-colors">INITIALIZE NEW ID</a>
+        </div>
+        
+        <!-- Corner decorations -->
+        <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[var(--color-neon-cyan)]"></div>
+        <div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[var(--color-neon-magenta)]"></div>
+        <div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[var(--color-neon-cyan)]"></div>
+        <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[var(--color-neon-magenta)]"></div>
+      </div>
+    </div>
+  `
+})
+export class LoginComponent {
+  loginForm: FormGroup;
+  loading = false;
+  submitted = false;
+  error = '';
+
+  private authService = inject(AuthService);
+  private router = inject(Router);
+  private fb = inject(FormBuilder);
+
+  constructor() {
+    // Si déjà connecté, rediriger
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/dashboard']);
+    }
+
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
+
+  get f() { return this.loginForm.controls; }
+
+  onSubmit() {
+    this.submitted = true;
+    this.error = '';
+
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    this.loading = true;
+    this.authService.login(this.loginForm.value).subscribe({
+      next: () => {
+        const returnUrl = '/dashboard';
+        this.router.navigateByUrl(returnUrl);
+      },
+      error: (err) => {
+        this.error = err.error?.message || 'Code d’accès invalide ou System Offline.';
+        this.loading = false;
+      }
+    });
+  }
+}

@@ -1,0 +1,65 @@
+# Visual Studio
+.vs/
+.vscode/
+*.user
+*.suo
+*.cache
+*.log
+*.sln.iml
+
+# Build artifacts
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+# IDE
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Rider
+.rider/
+.idea/
+*.sln.iml
+
+# NuGet
+*.nupkg
+.nuget/
+
+# Coverage
+coverage/
+*.trx
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# Database
+*.mdf
+*.ldf
+*.db
+
+# Test Results
+TestResults/

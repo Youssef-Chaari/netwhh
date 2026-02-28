@@ -1,0 +1,185 @@
+<div class="min-h-screen bg-[var(--color-bg)] text-white p-6 relative overflow-hidden">
+
+
+
+    <!-- MAIN CONTENT -->
+    <main class="mt-24 max-w-7xl mx-auto relative z-10">
+        <div class="flex flex-col gap-8">
+
+            <!-- HEADER -->
+            <div class="flex justify-between items-end border-b border-gray-800 pb-4">
+                <div>
+                    <h2 class="text-3xl font-bold font-mono text-white tracking-widest"><span
+                            class="neon-text-magenta">SYS</span>_USERS</h2>
+                    <p class="text-[var(--color-neon-cyan)] text-xs font-mono tracking-widest uppercase mt-1">Global
+                        System Access Control</p>
+                </div>
+                <button (click)="openCreateForm()" class="btn-neon-magenta flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                    {{ showForm ? 'CANCEL' : 'NOUVEAU COMPTE' }}
+                </button>
+            </div>
+
+            <!-- FORM PANEL -->
+            <div *ngIf="showForm"
+                class="glass-panel p-6 animate-fade-in border-l-4 border-l-[var(--color-neon-magenta)]">
+                <h3
+                    class="text-sm font-mono text-[var(--color-neon-magenta)] uppercase tracking-widest mb-6 border-b border-gray-800 pb-2">
+                    {{ editingUserId ? 'UPDATE SYSTEM ROLE / USER' : 'INITIALIZE SYSTEM ACCOUNT' }}
+                </h3>
+
+                <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Username -->
+                        <div class="flex flex-col gap-1">
+                            <label
+                                class="text-[10px] text-[var(--color-neon-cyan)] font-mono tracking-widest uppercase">ID
+                                / Pseudo</label>
+                            <input type="text" formControlName="username" class="sci-input w-full"
+                                placeholder="ex: admin_neo" />
+                        </div>
+
+                        <!-- Email -->
+                        <div class="flex flex-col gap-1">
+                            <label
+                                class="text-[10px] text-[var(--color-neon-cyan)] font-mono tracking-widest uppercase">Contact
+                                Protocol (Email)</label>
+                            <input type="email" formControlName="email" class="sci-input w-full"
+                                placeholder="ex: neo@matrix.com" />
+                        </div>
+
+                        <!-- First Name -->
+                        <div class="flex flex-col gap-1">
+                            <label
+                                class="text-[10px] text-[var(--color-neon-cyan)] font-mono tracking-widest uppercase">First
+                                Name</label>
+                            <input type="text" formControlName="firstName" class="sci-input w-full"
+                                placeholder="ex: Thomas" />
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="flex flex-col gap-1">
+                            <label
+                                class="text-[10px] text-[var(--color-neon-cyan)] font-mono tracking-widest uppercase">Last
+                                Name</label>
+                            <input type="text" formControlName="lastName" class="sci-input w-full"
+                                placeholder="ex: Anderson" />
+                        </div>
+
+                        <!-- Password -->
+                        <div class="flex flex-col gap-1">
+                            <label
+                                class="text-[10px] text-[var(--color-neon-cyan)] font-mono tracking-widest uppercase">Neural
+                                Password {{ editingUserId ? '(Leave blank to keep current)' : '' }}</label>
+                            <input type="password" formControlName="password" class="sci-input w-full"
+                                placeholder="**********" />
+                        </div>
+
+                        <!-- RoleName -->
+                        <div class="flex flex-col gap-1">
+                            <label
+                                class="text-[10px] text-[var(--color-neon-cyan)] font-mono tracking-widest uppercase">Clearance
+                                Level (Role)</label>
+                            <select formControlName="roleName" class="sci-input w-full bg-black/80 appearance-none">
+                                <option value="Admin">LEVEL 1 / ADMIN</option>
+                                <option value="User">LEVEL 2 / USER</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 flex justify-end">
+                        <button type="submit" [disabled]="userForm.invalid || submitting"
+                            class="btn-neon-cyan min-w-[150px] disabled:opacity-50 flex justify-center">
+                            <span *ngIf="!submitting">{{ editingUserId ? 'UPDATE_CREDENTIALS' : 'SAVE_ACCOUNT' }}</span>
+                            <span *ngIf="submitting" class="animate-pulse">TRANSMITTING...</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- DATA OVERVIEW LAYER -->
+            <div class="glass-panel overflow-hidden">
+
+                <!-- Loading State -->
+                <div *ngIf="loading" class="p-12 flex flex-col items-center justify-center gap-4">
+                    <div
+                        class="w-12 h-12 border-2 border-t-[var(--color-neon-cyan)] border-r-transparent border-b-[var(--color-neon-magenta)] border-l-transparent rounded-full animate-spin">
+                    </div>
+                    <div class="font-mono text-xs text-[var(--color-neon-cyan)] tracking-[0.2em] animate-pulse">
+                        ESTABLISHING SECURE CONNECTION...</div>
+                </div>
+
+                <!-- Data Table -->
+                <div *ngIf="!loading" class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-[800px]">
+                        <thead>
+                            <tr
+                                class="bg-black/40 border-b border-gray-800 text-[10px] font-mono text-gray-500 tracking-widest uppercase">
+                                <th class="p-4 font-medium">SYS_ID</th>
+                                <th class="p-4 font-medium">Identity (Pseudo / Email)</th>
+                                <th class="p-4 font-medium">Real Name</th>
+                                <th class="p-4 font-medium text-center">Clearance Level (Role)</th>
+                                <th class="p-4 font-medium text-center">Protocol Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of users"
+                                class="border-b border-gray-800/50 hover:bg-white/5 transition-colors group">
+                                <td class="p-4">
+                                    <div
+                                        class="font-mono text-xs text-gray-400 group-hover:text-[var(--color-neon-cyan)] transition-colors">
+                                        USR-{{user.id.toString().padStart(4, '0')}}
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <div class="font-semibold text-gray-200">{{ user.username }}</div>
+                                    <div class="text-xs text-gray-500 font-mono">{{ user.email }}</div>
+                                </td>
+                                <td class="p-4 text-gray-300">
+                                    {{ user.firstName }} {{ user.lastName }}
+                                </td>
+                                <td class="p-4 text-center">
+                                    <span
+                                        [ngClass]="user.role === 'Admin' ? 'text-red-500 border-red-500/30 bg-red-500/10' : 'text-blue-400 border-blue-400/30 bg-blue-400/10'"
+                                        class="px-2 py-1 text-[10px] font-mono border rounded">
+                                        {{ user.role }}
+                                    </span>
+                                </td>
+                                <td class="p-4 text-center">
+                                    <div class="flex items-center justify-center gap-3">
+                                        <button (click)="openEditForm(user)"
+                                            class="text-[var(--color-neon-cyan)] hover:text-white transition-colors"
+                                            title="Modify Clearance">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                                            </svg>
+                                        </button>
+                                        <button (click)="deleteUser(user.id)"
+                                            class="text-red-500 hover:text-red-400 transition-colors"
+                                            title="Purge Account">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="users.length === 0">
+                                <td colspan="5" class="p-8 text-center text-gray-500 font-mono text-xs tracking-widest">
+                                    NO_ACCOUNTS_FOUND</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
