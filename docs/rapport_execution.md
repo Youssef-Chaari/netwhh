@@ -30,8 +30,8 @@ Conformément aux standards ISTQB :
 | `LoginAsync_WithInvalidPassword_ThrowsUnauthorizedAccessException` | ✅ Pass | ~200ms |
 | `LoginAsync_WithUnknownUser_ThrowsUnauthorizedAccessException` | ✅ Pass | ~150ms |
 
-**Commande exécutée :** `dotnet test BiProject.Tests`
-**Résumé console :** `Test summary: total: 7, failed: 0, succeeded: 7, duration: ~16s`
+**Commande exécutée :** `dotnet test BiProject.Tests`  
+**Résumé console synthétique :** `Test summary: total: 8, failed: 1, succeeded: 7` (L'échec de CT-BUG-01 valide le bug).
 
 ### Tests d’intégration (Backend) — `OrderIntegrationTests.cs`
 
@@ -57,9 +57,9 @@ Conformément aux standards ISTQB :
 
 ---
 
-## Démonstration Dynamique d'Anomalie (Bug Exploit)
+## Validation de Sécurité (Échec révélateur)
 
-Ce test n'est pas un test de validation/confirmation (Pass), mais une preuve d'exploitation (PoC) d'une faille de sécurité confirmée.
+Ce test vérifie la propriété de sécurité attendue. Son échec (HTTP 200 reçu au lieu de 403) constitue la preuve formelle du défaut de contrôle d'accès.
 
 | ID | Titre | Objectif | Résultat de la validation |
 |---|---|---|---|
