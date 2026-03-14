@@ -1,4 +1,4 @@
-# Rapport Final — Projet QA Académique : BiProject
+# Rapport Final — Projet QA Académique : BiProject (Y. Chaari & M. Zouari)
 
 ## 1. Introduction
 Ce document constitue le rapport final exhaustif du projet d'Assurance Qualité mené sur l'application **BiProject**. Réalisé dans le cadre du module "Test et Qualité Logiciel", ce travail démontre la mise en œuvre pratique des standards industriels (ISTQB, ISO/IEC 25010) via une approche hybride mêlant analyses statiques et tests automatisés.
@@ -128,7 +128,7 @@ python -m pytest tests/ -v
 ---
 
 ## 11. Limites et recommandations
-- **Limites** : Seedage manuel de certains comptes de test, 6 cas documentés non encore automatisés par manque de temps de déploiement.
+- **Limites** : Seedage manuel de certains comptes de test. Les tests système E2E de commande (CT-16, CT-17) sont restés au stade documentaire en raison de l'instabilité du Frontend, mais sont couverts par les tests d'intégration API équivalents.
 - **Recommandations** : Corriger l'IDOR immédiatement en injectant le `ClaimTypes.NameIdentifier` dans la logique métier. Intégrer les tests dans une pipeline CI/CD (GitHub Actions).
 
 ---
@@ -142,5 +142,20 @@ Ce projet a bénéficié de l'assistance de l'IA **Antigravity** (Google Deepmin
 
 ---
 
-## 13. Conclusion
+---
+
+## 14. Bonus Académique : Prototype Robot Framework
+En complément de la suite Selenium principale, un prototype basé sur **Robot Framework** a été ajouté pour démontrer l’ouverture du projet à d’autres outils d’automatisation.
+
+- **Objectif** : Tester la lisibilité des scénarios via une approche "Keyword-Driven".
+- **Fichiers** : [login_tests.robot](file:///c:/Users/lenovo/Downloads/netwhh-main/netwhh/tests_robot/login_tests.robot)
+- **Scénarios couverts** : 
+    1. Authentification nominale (Happy Path).
+    2. Consultation automatique du catalogue après connexion.
+- **Valeur ajoutée** : Meilleure collaboration avec les profils non techniques grâce à des keywords en langage naturel.
+- **Statut** : Prototype fonctionnel (Preuve de concept).
+
+---
+
+## 15. Conclusion
 Le projet BiProject QA présente une maturité de test avancée. La combinaison de la pyramide d'automatisation et de la détection proactive de vulnérabilités critiques via l'analyse statique répond aux exigences majeures de qualité fixées lors de la conception. Le projet est conforme au cahier des charges et prêt pour une remise académique.

@@ -26,7 +26,8 @@ def test_successful_registration(driver):
     
     page.register("John", "Doe", username, email, "Password123!")
     
-    time.sleep(5) # Attente de la redirection et du traitement
+    # Attente intelligente de la redirection via BasePage
+    page.wait_for_url_contains("/products")
     
     current_url = driver.current_url
     assert "/products" in current_url, f"[CT-10 ÉCHEC] Redirection vers /products attendue, obtenue : {current_url}"
@@ -42,9 +43,8 @@ def test_registration_duplicate_user(driver):
     # Utilisation du compte de test déjà existant
     page.register("Test", "User", "test_user", "test@example.com", "TestPassword123!")
     
-    time.sleep(3)
-    
+    # get_error_message utilise déjà un WebDriverWait interne
     error_msg = page.get_error_message()
     assert error_msg is not None, "[CT-11 ÉCHEC] Aucun message d'erreur affiché pour un doublon"
-    assert "Identifiant déjà existant" in error_msg or "Erreur" in error_msg or "existe déjà" in error_msg
+    assert any(term in error_msg for term in ["Identifiant déjà existant", "Erreur", "existe déjà"]), f"Message inattendu: {error_msg}"
     assert "/register" in driver.current_url

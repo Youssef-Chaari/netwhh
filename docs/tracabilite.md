@@ -1,4 +1,4 @@
-# Tableau de Traçabilité — BiProject QA
+# Tableau de Traçabilité — BiProject QA (Y. Chaari & M. Zouari)
 
 Ce tableau relie les exigences fonctionnelles et non-fonctionnelles du système aux cas de test implémentés.
 
@@ -16,14 +16,15 @@ Ce tableau relie les exigences fonctionnelles et non-fonctionnelles du système 
 | REQ-AUTH-03 | Inscription réussie d'un nouveau compte | CT-10 | Système (E2E) | Fonctionnel | Boîte noire | `test_register.py` | ✅ Pass |
 | REQ-AUTH-03 | Rejet de doublons à l'inscription | CT-11 | Système (E2E) | Fonctionnel | Boîte noire | `test_register.py` | ✅ Pass |
 | REQ-CAT-01 | Consultation du catalogue de produits | CT-12 | Système (E2E) | Fonctionnel | Boîte noire | `test_catalog.py` | ✅ Pass |
-| REQ-CAT-01 | Consultation du détail d'un produit | CT-13 | Intégration (Backend) | Fonctionnel | Boîte noire | `ProductIntegrationTests.cs` | ⏳ N/E |
+| REQ-CAT-01 | Consultation du détail d'un produit | CT-13 | Intégration (Backend) | Fonctionnel | Boîte noire | `ProductIntegrationTests.cs` | ✅ Pass |
 | REQ-SEC-01 | Restriction Admin sur création de produits | CT-14 | Intégration (Backend) | Sécurité | Boîte noire | `SecurityIntegrationTests.cs` | ✅ Pass |
-| REQ-CAT-02 | Création d'un produit par Admin | CT-15 | Intégration (Backend) | Fonctionnel | Boîte noire | `AdminIntegrationTests.cs` | ⏳ N/E |
-| REQ-ORD-01 | Consultation de ses propres commandes | CT-16 | Système (E2E) | Fonctionnel | Boîte noire | `test_orders.py` | ⏳ N/E |
-| REQ-ORD-02 | Passage d'une commande valide | CT-17 | Système (E2E) | Fonctionnel | Boîte noire | `test_orders.py` | ⏳ N/E |
-| REQ-SEC-02 | Protection contre l'accès IDOR aux commandes | CT-18 | Intégration (Backend) | Sécurité | Boîte noire | `SecurityIntegrationTests.cs` | ⏳ N/E |
-| REQ-SEC-03 | Restriction Admin sur Analytics BI | CT-19 | Intégration (Backend) | Sécurité | Boîte noire | `SecurityIntegrationTests.cs` | ⏳ N/E |
+| REQ-CAT-02 | Création d'un produit par Admin | CT-15 | Intégration (Backend) | Fonctionnel | Boîte noire | `AdminIntegrationTests.cs` | ✅ Pass |
+| REQ-ORD-01 | Consultation de ses propres commandes | CT-16 | Intégration (Backend) | Fonctionnel | Boîte noire | `OrderIntegrationTests.cs` | ✅ Pass |
+| REQ-ORD-02 | Passage d'une commande valide | CT-17 | Intégration (Backend) | Fonctionnel | Boîte noire | `OrderIntegrationTests.cs` | ✅ Pass |
 | REQ-SEC-02 | Identification d'anomalies (IDOR, Trust Boundary, Logging, Structure) | CT-ST-01 | Statique | Sécurité / Qualité | Revues & Inspections | Plusieurs fichiers | ✅ 3 anomalies détectées |
+| REQ-SEC-02 | Protection contre l'accès IDOR aux commandes | CT-18 | Intégration (Backend) | Sécurité | Boîte noire | `SecurityIntegrationTests.cs` | ✅ Pass |
+| REQ-SEC-03 | Restriction Admin sur Analytics BI | CT-19 | Intégration (Backend) | Sécurité | Boîte noire | `SecurityIntegrationTests.cs` | ✅ Pass |
+| — | Validation de la faille IDOR (Preuve dynamique) | CT-BUG-01 | Intégration (Backend) | Sécurité | Boîte noire | `VulnerabilityExploitTests.cs` | ❌ Fail |
 
 ### Démonstration de Vulnérabilités (Dynamic Bug Exploit)
 | Exigence | Bug | CT ID | Niveau | Type | Fichier | Statut |

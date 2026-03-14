@@ -45,11 +45,13 @@ def test_login_successful_user(driver):
     """
     page = LoginPage(driver)
     page.login("test_user", "TestPassword123!")
-    time.sleep(3)
-
+    
+    # Attente intelligente de la redirection
+    page.wait_for_url_contains("/products")
+    
     current = driver.current_url
-    assert "/products" in current or "/dashboard" in current, (
-        f"[CT-01 ÉCHEC] URL attendue: /products ou /dashboard | URL obtenue: {current}"
+    assert "/products" in current, (
+        f"[CT-01 ÉCHEC] URL attendue: /products | URL obtenue: {current}"
     )
 
 
@@ -63,7 +65,10 @@ def test_login_invalid_password(driver):
     """
     page = LoginPage(driver)
     page.login("test_user", "MauvaisMotDePasse999!")
-    time.sleep(3)
+    
+    # Ici on peut attendre un peu ou vérifier un message d'erreur
+    # Pour CT-02, on reste sur /login
+    page.wait_for_url_contains("/login")
 
     assert "/login" in driver.current_url, (
         f"[CT-02 ÉCHEC] Aurais dû rester sur /login | URL obtenue: {driver.current_url}"
@@ -79,8 +84,10 @@ def test_protected_route_without_auth(driver):
     Technique : Boîte noire — Valeur limite (accès sans token).
     Confirmé dans le code : authGuard sur /products redirige vers /login si non connecté.
     """
-    driver.get(f"{BASE_URL}/products")
-    time.sleep(2)
+    driver.get("http://localhost:4200/products")
+    
+    # L'AuthGuard est rapide, mais on utilise quand même une attente explicite
+    LoginPage(driver).wait_for_url_contains("/login")
 
     assert "/login" in driver.current_url, (
         f"[CT-03 ÉCHEC] L'authGuard aurait dû rediriger vers /login | URL obtenue: {driver.current_url}"

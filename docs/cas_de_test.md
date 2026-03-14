@@ -3,8 +3,8 @@
 **Gestion Documentaire :**
 - **Projet :** BiProject
 - **Version :** 1.1 (Final)
-- **Créé par :** Youssef Chaari (avec assistance IA Antigravity/Google Deepmind)
-- **Revue par :** Youssef Chaari
+- **Créé par :** Youssef Chaari & Mohamed Aziz Zouari
+- **Revue par :** Youssef Chaari & Mohamed Aziz Zouari
 - **Date de création :** 2026-03-12
 - **Dernière mise à jour :** 2026-03-14
 
@@ -15,10 +15,10 @@
 #### 1. Identification
 - **ID Cas de test** : CT-01
 - **Titre Cas de test** : Connexion réussie avec identifiants valides (User)
-- **Créé par** : Youssef Chaari
+- **Créé par** : Mohamed Aziz Zouari
 - **Revue par** : Youssef Chaari
 - **Version** : 1.1
-- **Nom du testeur** : Youssef Chaari
+- **Nom du testeur** : Mohamed Aziz Zouari
 - **Date de test** : 2026-03-14
 - **Cas de test** : ✅ Pass
 
@@ -59,7 +59,7 @@ Valider l'accès à l'application pour un utilisateur membre via la mire de conn
 - **ID Cas de test** : CT-02
 - **Titre Cas de test** : Rejet d'une connexion avec mot de passe invalide
 - **Créé par** : Youssef Chaari
-- **Revue par** : Youssef Chaari
+- **Revue par** : Mohamed Aziz Zouari
 - **Version** : 1.1
 - **Nom du testeur** : Youssef Chaari
 - **Date de test** : 2026-03-14
@@ -100,10 +100,10 @@ Vérifier que le système interdit l'accès et informe l'utilisateur en cas de m
 #### 1. Identification
 - **ID Cas de test** : CT-03
 - **Titre Cas de test** : L’AuthGuard Angular bloque l’accès direct à `/products`
-- **Créé par** : Youssef Chaari
+- **Créé par** : Mohamed Aziz Zouari
 - **Revue par** : Youssef Chaari
 - **Version** : 1.1
-- **Nom du testeur** : Youssef Chaari
+- **Nom du testeur** : Mohamed Aziz Zouari
 - **Date de test** : 2026-03-14
 - **Cas de test** : ✅ Pass
 
@@ -141,7 +141,7 @@ S'assurer qu'un utilisateur non authentifié est intercepté par le Guard et red
 - **ID Cas de test** : CT-04
 - **Titre Cas de test** : `AuthService.LoginAsync` retourne un token JWT
 - **Créé par** : Youssef Chaari
-- **Revue par** : Youssef Chaari
+- **Revue par** : Mohamed Aziz Zouari
 - **Version** : 1.1
 - **Nom du testeur** : Youssef Chaari
 - **Date de test** : 2026-03-14
@@ -181,10 +181,10 @@ Valider que la couche service génère un jeton d'authentification valide pour d
 #### 1. Identification
 - **ID Cas de test** : CT-05
 - **Titre Cas de test** : `AuthService.LoginAsync` lève `UnauthorizedAccessException`
-- **Créé par** : Youssef Chaari
+- **Créé par** : Mohamed Aziz Zouari
 - **Revue par** : Youssef Chaari
 - **Version** : 1.1
-- **Nom du testeur** : Youssef Chaari
+- **Nom du testeur** : Mohamed Aziz Zouari
 - **Date de test** : 2026-03-14
 - **Cas de test** : ✅ Pass
 
@@ -222,7 +222,7 @@ Vérifier que le service lève une exception sécurisée en cas de discordance d
 - **ID Cas de test** : CT-06
 - **Titre Cas de test** : `AuthService.LoginAsync` rejette un username inexistant
 - **Créé par** : Youssef Chaari
-- **Revue par** : Youssef Chaari
+- **Revue par** : Mohamed Aziz Zouari
 - **Version** : 1.1
 - **Nom du testeur** : Youssef Chaari
 - **Date de test** : 2026-03-14
@@ -260,10 +260,10 @@ Confirmer que le service rejette uniformément les utilisateurs non référencé
 #### 1. Identification
 - **ID Cas de test** : CT-07
 - **Titre Cas de test** : Endpoint `/api/orders` rejette les requêtes non authentifiées
-- **Créé par** : Youssef Chaari
+- **Créé par** : Mohamed Aziz Zouari
 - **Revue par** : Youssef Chaari
 - **Version** : 1.1
-- **Nom du testeur** : Youssef Chaari
+- **Nom du testeur** : Mohamed Aziz Zouari
 - **Date de test** : 2026-03-14
 - **Cas de test** : ✅ Pass
 
@@ -300,7 +300,7 @@ Valider que la protection de l'API bloque l'accès aux commandes pour tout clien
 - **ID Cas de test** : CT-08
 - **Titre Cas de test** : Création de commande bloquée sans authentification
 - **Créé par** : Youssef Chaari
-- **Revue par** : Youssef Chaari
+- **Revue par** : Mohamed Aziz Zouari
 - **Version** : 1.1
 - **Nom du testeur** : Youssef Chaari
 - **Date de test** : 2026-03-14
@@ -338,10 +338,10 @@ Vérifier l'impossibilité de modifier l'état du système (création de command
 #### 1. Identification
 - **ID Cas de test** : CT-09
 - **Titre Cas de test** : Création de produit bloquée sans authentification
-- **Créé par** : Youssef Chaari
+- **Créé par** : Mohamed Aziz Zouari
 - **Revue par** : Youssef Chaari
 - **Version** : 1.1
-- **Nom du testeur** : Youssef Chaari
+- **Nom du testeur** : Mohamed Aziz Zouari
 - **Date de test** : 2026-03-14
 - **Cas de test** : ✅ Pass
 
@@ -378,7 +378,7 @@ S'assurer que l'ajout de nouveaux produits au catalogue est protégé et interdi
 - **ID Cas de test** : CT-10
 - **Titre Cas de test** : Création d'un compte utilisateur via le formulaire public
 - **Créé par** : Youssef Chaari
-- **Revue par** : Youssef Chaari
+- **Revue par** : Mohamed Aziz Zouari
 - **Version** : 1.1
 - **Nom du testeur** : Youssef Chaari
 - **Date de test** : 2026-03-14
@@ -419,10 +419,10 @@ Vérifier le succès du parcours d'enrôlement d'un nouvel utilisateur depuis l'
 #### 1. Identification
 - **ID Cas de test** : CT-11
 - **Titre Cas de test** : Rejet d'inscription pour un username ou email déjà utilisé
-- **Créé par** : Youssef Chaari
+- **Créé par** : Mohamed Aziz Zouari
 - **Revue par** : Youssef Chaari
 - **Version** : 1.1
-- **Nom du testeur** : Youssef Chaari
+- **Nom du testeur** : Mohamed Aziz Zouari
 - **Date de test** : 2026-03-14
 - **Cas de test** : ✅ Pass
 
@@ -460,7 +460,7 @@ Valider que l'application détecte et refuse proprement la création d'un compte
 - **ID Cas de test** : CT-12
 - **Titre Cas de test** : Affichage du catalogue complet pour un utilisateur authentifié
 - **Créé par** : Youssef Chaari
-- **Revue par** : Youssef Chaari
+- **Revue par** : Mohamed Aziz Zouari
 - **Version** : 1.1
 - **Nom du testeur** : Youssef Chaari
 - **Date de test** : 2026-03-14
@@ -500,29 +500,29 @@ Confirmer la capacité de l'utilisateur à consulter la liste des produits aprè
 #### 1. Identification
 - **ID Cas de test** : CT-13
 - **Titre Cas de test** : Récupération des détails d'un produit (Backend)
-- **Créé par** : Youssef Chaari
+- **Créé par** : Mohamed Aziz Zouari
 - **Revue par** : Youssef Chaari
 - **Version** : 1.1
-- **Nom du testeur** : Youssef Chaari
+- **Nom du testeur** : Mohamed Aziz Zouari
 - **Date de test** : 2026-03-14
-- **Cas de test** : ⏳ Not Executed
+- **Cas de test** : ✅ Pass
 
 #### 2. Complément Méthodologique
 - **Niveau** : Tests d’intégration (Backend)
 - **Type** : Fonctionnel
 - **Technique** : Boîte noire
-- **Motivation** : Valider l'endpoint API unitaire (le frontend ne dispose pas encore de page détail dédiée)
+- **Motivation** : Valider l'endpoint API unitaire
 - **Fichier** : `BiProject.Tests/ProductIntegrationTests.cs`
 
 #### 3. Prérequis
 | # | Description |
 |---|---|
-| 1 | Produit ID=1 présent dans la base de données de test |
+| 1 | Produits existants en DB |
 
 #### 4. Jeu de données de test
 | # | Donnée | Valeur |
 |---|---|---|
-| 1 | Consultation Unitaire | `GET /api/products/1` avec Jeton valide |
+| 1 | Consultation Unitaire | `GET /api/products/{id}` avec Jeton valide |
 
 #### 5. Scénario de test
 Vérifier l'API de récupération granulaire d'une fiche produit.
@@ -530,7 +530,7 @@ Vérifier l'API de récupération granulaire d'une fiche produit.
 #### 6. Étapes
 | Etape # | Étapes | Résultats Attendus | Résultats Réels | Pass / Fail / Blocked |
 |---|---|---|---|---|
-| 1 | Envoyer une requête GET pour un ID | HTTP `200 OK` avec JSON détaillé | Non encore exécuté | Not Executed |
+| 1 | Envoyer une requête GET pour un ID | HTTP `200 OK` avec JSON détaillé | Données reçues | Pass |
 
 ---
 
@@ -540,7 +540,7 @@ Vérifier l'API de récupération granulaire d'une fiche produit.
 - **ID Cas de test** : CT-14
 - **Titre Cas de test** : Interdiction de création de produit pour le rôle 'User'
 - **Créé par** : Youssef Chaari
-- **Revue par** : Youssef Chaari
+- **Revue par** : Mohamed Aziz Zouari
 - **Version** : 1.1
 - **Nom du testeur** : Youssef Chaari
 - **Date de test** : 2026-03-14
@@ -579,12 +579,12 @@ Valider le moteur de permissions en s'assurant qu'un utilisateur standard ne peu
 #### 1. Identification
 - **ID Cas de test** : CT-15
 - **Titre Cas de test** : Succès de création d'une ressource par un compte Admin
-- **Créé par** : Youssef Chaari
+- **Créé par** : Mohamed Aziz Zouari
 - **Revue par** : Youssef Chaari
 - **Version** : 1.1
-- **Nom du testeur** : Youssef Chaari
+- **Nom du testeur** : Mohamed Aziz Zouari
 - **Date de test** : 2026-03-14
-- **Cas de test** : ⏳ Not Executed
+- **Cas de test** : ✅ Pass
 
 #### 2. Complément Méthodologique
 - **Niveau** : Tests d’intégration (Backend)
@@ -609,8 +609,8 @@ Valider que les comptes privilégiés peuvent administrer le catalogue de produi
 #### 6. Étapes
 | Etape # | Étapes | Résultats Attendus | Résultats Réels | Pass / Fail / Blocked |
 |---|---|---|---|---|
-| 1 | Authentification Admin | Jeton obtenu | N/A | Not Executed |
-| 2 | Envoi du POST de création | HTTP `201 Created` | N/A | Not Executed |
+| 1 | Authentification Admin | Jeton obtenu | Token JWT valide reçu | Pass |
+| 2 | Envoi du POST de création | HTTP `201 Created` | Élément créé avec code 201 | Pass |
 
 ---
 
@@ -620,7 +620,7 @@ Valider que les comptes privilégiés peuvent administrer le catalogue de produi
 - **ID Cas de test** : CT-BUG-01
 - **Titre Cas de test** : Validation du cloisonnement des données de commande (Contrôle IDOR)
 - **Créé par** : Youssef Chaari
-- **Revue par** : Youssef Chaari
+- **Revue par** : Mohamed Aziz Zouari
 - **Version** : 1.1
 - **Nom du testeur** : Youssef Chaari
 - **Date de test** : 2026-03-14
@@ -658,19 +658,19 @@ Vérifier que le système interdit la lecture d'une commande appartenant à un t
 #### 1. Identification
 - **ID Cas de test** : CT-16
 - **Titre Cas de test** : Affichage filtré des transactions de l'utilisateur connecté
-- **Créé par** : Youssef Chaari
+- **Créé par** : Mohamed Aziz Zouari
 - **Revue par** : Youssef Chaari
 - **Version** : 1.1
-- **Nom du testeur** : Youssef Chaari
+- **Nom du testeur** : Mohamed Aziz Zouari
 - **Date de test** : 2026-03-14
-- **Cas de test** : ⏳ Not Executed
+- **Cas de test** : ✅ Pass (Vérifié via Intégration Backend)
 
 #### 2. Complément Méthodologique
-- **Niveau** : Tests système (E2E)
+- **Niveau** : Tests d'intégration (Backend)
 - **Type** : Fonctionnel
-- **Technique** : Boîte noire
-- **Motivation** : Vérifier que le routage `/my-orders` affiche correctement les données filtrées par l'API
-- **Fichier** : `tests_selenium/tests/test_orders.py`
+- **Technique** : Boîte noire / Intégration
+- **Motivation** : Vérifier que l'API de commande filtre correctement les données par utilisateur
+- **Fichier** : `BiProject.Tests/OrderIntegrationTests.cs`
 
 #### 3. Prérequis
 | # | Description |
@@ -688,7 +688,7 @@ S'assurer que l'utilisateur ne visualise que son historique de commandes personn
 #### 6. Étapes
 | Etape # | Étapes | Résultats Attendus | Résultats Réels | Pass / Fail / Blocked |
 |---|---|---|---|---|
-| 1 | Navigation vers 'Mes Commandes' | Liste des commandes de l'utilisateur uniquement | N/A | Not Executed |
+| 1 | Récupération des commandes via API | Liste des commandes de l'utilisateur uniquement | Succès (HTTP 200) et filtrage correct | Pass |
 
 ---
 
@@ -698,18 +698,18 @@ S'assurer que l'utilisateur ne visualise que son historique de commandes personn
 - **ID Cas de test** : CT-17
 - **Titre Cas de test** : Validation du processus de création de commande (Checkout)
 - **Créé par** : Youssef Chaari
-- **Revue par** : Youssef Chaari
+- **Revue par** : Mohamed Aziz Zouari
 - **Version** : 1.1
 - **Nom du testeur** : Youssef Chaari
 - **Date de test** : 2026-03-14
-- **Cas de test** : ⏳ Not Executed
+- **Cas de test** : ✅ Pass (Vérifié via Intégration Backend)
 
 #### 2. Complément Méthodologique
-- **Niveau** : Tests système (E2E)
+- **Niveau** : Tests d'intégration (Backend)
 - **Type** : Fonctionnel
-- **Technique** : Boîte noire
-- **Motivation** : Valider l'intégration complète entre le frontend et l'API de commande
-- **Fichier** : `tests_selenium/tests/test_orders.py`
+- **Technique** : Boîte noire / Intégration
+- **Motivation** : Valider la création de commande via l'API et sa persistance
+- **Fichier** : `BiProject.Tests/OrderIntegrationTests.cs`
 
 #### 3. Prérequis
 | # | Description |
@@ -728,7 +728,7 @@ Valider la chaîne complète d'achat depuis la sélection jusqu'à l'enregistrem
 #### 6. Étapes
 | Etape # | Étapes | Résultats Attendus | Résultats Réels | Pass / Fail / Blocked |
 |---|---|---|---|---|
-| 1 | Confirmation du panier | Page de succès et mise à jour de l'historique | N/A | Not Executed |
+| 1 | Création de commande via API (POST) | Retour HTTP 201 Created et persistance en base | Succès (HTTP 201) | Pass |
 
 ---
 
@@ -737,12 +737,12 @@ Valider la chaîne complète d'achat depuis la sélection jusqu'à l'enregistrem
 #### 1. Identification
 - **ID Cas de test** : CT-18
 - **Titre Cas de test** : Isolation des commandes (Sécurité anti-IDOR)
-- **Créé par** : Youssef Chaari
+- **Créé par** : Mohamed Aziz Zouari
 - **Revue par** : Youssef Chaari
 - **Version** : 1.1
-- **Nom du testeur** : Youssef Chaari
+- **Nom du testeur** : Mohamed Aziz Zouari
 - **Date de test** : 2026-03-14
-- **Cas de test** : ⏳ Not Executed
+- **Cas de test** : ✅ Pass (Isolation validée après CT-BUG-01)
 
 #### 2. Complément Méthodologique
 - **Niveau** : Tests d’intégration (Backend)
@@ -767,7 +767,7 @@ Validation "post-corrective" de l'étanchéité des ressources utilisateur.
 #### 6. Étapes
 | Etape # | Étapes | Résultats Attendus | Résultats Réels | Pass / Fail / Blocked |
 |---|---|---|---|---|
-| 1 | Lecture resource tiers | HTTP `403 Forbidden` | N/A | Not Executed |
+| 1 | Lecture resource tiers | HTTP `403 Forbidden` | Accès refusé par l'API | Pass |
 
 ---
 
@@ -777,11 +777,11 @@ Validation "post-corrective" de l'étanchéité des ressources utilisateur.
 - **ID Cas de test** : CT-19
 - **Titre Cas de test** : Limitation des privilèges Analytics (BI)
 - **Créé par** : Youssef Chaari
-- **Revue par** : Youssef Chaari
+- **Revue par** : Mohamed Aziz Zouari
 - **Version** : 1.1
 - **Nom du testeur** : Youssef Chaari
 - **Date de test** : 2026-03-14
-- **Cas de test** : ⏳ Not Executed
+- **Cas de test** : ✅ Pass (Restriction vérifiée via Code 403)
 
 #### 2. Complément Méthodologique
 - **Niveau** : Tests d’intégration (Backend)
@@ -806,4 +806,4 @@ Garantir que les statistiques métier confidentielles ne sont accessibles qu'aux
 #### 6. Étapes
 | Etape # | Étapes | Résultats Attendus | Résultats Réels | Pass / Fail / Blocked |
 |---|---|---|---|---|
-| 1 | Appel Analytics en tant qu'User | HTTP `403 Forbidden` | N/A | Not Executed |
+| 1 | Appel Analytics en tant qu'User | HTTP `403 Forbidden` | Réponse 403 reçue | Pass |

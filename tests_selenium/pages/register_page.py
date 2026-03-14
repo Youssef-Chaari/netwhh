@@ -1,33 +1,30 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from .base_page import BasePage
 
-class RegisterPage:
-    def __init__(self, driver):
-        self.driver = driver
-        self.url = "http://localhost:4200/register"
-        self.first_name_input = (By.CSS_SELECTOR, "input[formControlName='firstName']")
-        self.last_name_input = (By.CSS_SELECTOR, "input[formControlName='lastName']")
-        self.username_input = (By.CSS_SELECTOR, "input[formControlName='username']")
-        self.email_input = (By.CSS_SELECTOR, "input[formControlName='email']")
-        self.password_input = (By.CSS_SELECTOR, "input[formControlName='password']")
-        self.submit_button = (By.CSS_SELECTOR, "button[type='submit']")
-        self.error_message_div = (By.CSS_SELECTOR, ".bg-red-900\/40")
+class RegisterPage(BasePage):
+    FIRST_NAME_INPUT = (By.CSS_SELECTOR, "input[formControlName='firstName']")
+    LAST_NAME_INPUT = (By.CSS_SELECTOR, "input[formControlName='lastName']")
+    USERNAME_INPUT = (By.CSS_SELECTOR, "input[formControlName='username']")
+    EMAIL_INPUT = (By.CSS_SELECTOR, "input[formControlName='email']")
+    PASSWORD_INPUT = (By.CSS_SELECTOR, "input[formControlName='password']")
+    SUBMIT_BUTTON = (By.CSS_SELECTOR, "button[type='submit']")
+    ERROR_MESSAGE_DIV = (By.CSS_SELECTOR, ".bg-red-900\/40")
 
     def load(self):
-        self.driver.get(self.url)
+        self.navigate_to("/register")
 
     def register(self, first_name, last_name, username, email, password):
-        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(self.first_name_input)).send_keys(first_name)
-        self.driver.find_element(*self.last_name_input).send_keys(last_name)
-        self.driver.find_element(*self.username_input).send_keys(username)
-        self.driver.find_element(*self.email_input).send_keys(email)
-        self.driver.find_element(*self.password_input).send_keys(password)
-        self.driver.find_element(*self.submit_button).click()
+        self.wait.until(EC.element_to_be_clickable(self.FIRST_NAME_INPUT)).send_keys(first_name)
+        self.driver.find_element(*self.LAST_NAME_INPUT).send_keys(last_name)
+        self.driver.find_element(*self.USERNAME_INPUT).send_keys(username)
+        self.driver.find_element(*self.EMAIL_INPUT).send_keys(email)
+        self.driver.find_element(*self.PASSWORD_INPUT).send_keys(password)
+        self.driver.find_element(*self.SUBMIT_BUTTON).click()
 
     def get_error_message(self):
         try:
-            element = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(self.error_message_div))
+            element = self.wait.until(EC.visibility_of_element_located(self.ERROR_MESSAGE_DIV))
             return element.text
         except:
             return None

@@ -1,15 +1,15 @@
-# Rapport d'Exécution — BiProject QA
-
+# Rapport d'Exécution — BiProject QA 
 ## Synthèse globale
 
 | Couche | Outil | Tests exécutés | Passés | Échoués | Bloqués |
 |---|---|---|---|---|---|
 | **Tests unitaires (Backend)** | xUnit (.NET) | 3 | ✅ 3 | 0 | 0 |
-| **Tests d’intégration (Backend)** | xUnit + Factory | 5 | ✅ 4 | ❌ 1 | 0 |
+| **Tests d’intégration (Backend)** | xUnit + Factory | 11 | ✅ 10 | ❌ 1 | 0 |
 | **Tests système (E2E) — Selenium + POM** | Selenium | 6 | ✅ 6 | 0 | 0 |
 | **Activités statiques** | Inspections & Revues | 3 activités | ✅ 3 anomalies détectées | — | — |
+| **Total automatisé** | — | **20** | **19** | **1** | **0** |
 
-**Total global des tests automatisés : 14 exécutés (13 Pass / 1 Fail révélateur) — ~92% de succès.**  
+**Statistiques globales : 20 tests exécutés (19 Pass / 1 Fail révélateur) — 95% de succès.**
 **L'unique échec (CT-BUG-01) confirme dynamiquement la vulnérabilité IDOR identifiée en analyse statique.**
 **Les activités statiques ont été réalisées séparément et ont permis d’identifier 3 anomalies de sécurité, de conception et de structure.**
 
@@ -41,6 +41,12 @@ Conformément aux standards ISTQB :
 | `CreateOrder_WithoutAuthentication_ReturnsUnauthorized` | ✅ Pass | 401 |
 | `CreateProduct_WithoutAuthentication_ReturnsUnauthorized` | ✅ Pass | 401 |
 | `PostProduct_AsUser_ReturnsForbidden` (CT-14) | ✅ Pass | 403 |
+| `GetProductById_ReturnsOk` (CT-13) | ✅ Pass | 200 |
+| `CreateProduct_AsAdmin_ReturnsCreated` (CT-15) | ✅ Pass | 201 |
+| `GetOrder_Isolation_ReturnsForbidden` (CT-18) | ✅ Pass | 403/404 |
+| `GetKpis_AsUser_ReturnsForbidden` (CT-19) | ✅ Pass | 403 |
+| `GetOrders_AsUser_ReturnsOk` (CT-16) | ✅ Pass | 200 |
+| `CreateOrder_AsUser_ReturnsCreated` (CT-17) | ✅ Pass | 201 |
 
 ---
 

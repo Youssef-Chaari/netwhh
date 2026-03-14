@@ -16,13 +16,11 @@ def test_consult_product_list(driver):
     login_page = LoginPage(driver)
     login_page.login("test_user", "TestPassword123!")
     
-    # Attendre la redirection vers /products
-    time.sleep(3)
+    # Attendre la redirection via login_page
+    login_page.wait_for_url_contains("/products")
     
     # 2. Vérifier le catalogue
     products_page = ProductsPage(driver)
-    # On est normalement déjà dessus, mais load() assure le coup si besoin
-    # products_page.load() 
     
     assert products_page.is_list_visible(), "[CT-12 ÉCHEC] La liste des produits n'est pas visible"
     count = products_page.get_product_count()
