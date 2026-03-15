@@ -22,15 +22,15 @@ L'objectif principal de notre mission a été de certifier la fiabilité du syst
 
 Le présent audit est strictement aligné sur les exigences académiques du cahier des charges.
 
-| Exigence Guideline | Mise en Œuvre et Preuve Factuelle |
-| :--- | :--- |
-| **Tests Statiques** | Inspections manuelles et revues de code (**AN-01** à **AN-03**). |
-| **Tests Fonctionnels** | Validation des flux Auth, Inscription, Catalogue et Commandes. |
+| Exigence Guideline         | Mise en Œuvre et Preuve Factuelle                                       |
+| :------------------------- | :---------------------------------------------------------------------- |
+| **Tests Statiques**        | Inspections manuelles et revues de code (**AN-01** à **AN-03**).        |
+| **Tests Fonctionnels**     | Validation des flux Auth, Inscription, Catalogue et Commandes.          |
 | **Tests Non-Fonctionnels** | Focus majeur sur la sécurité (Contrôle d'accès et vulnérabilités IDOR). |
-| **Niveaux de Test** | Couverture des trois niveaux : Unitaire, Intégration et Système (E2E). |
-| **Techniques de Test** | Alternance entre techniques de Boîte Blanche et de Boîte Noire. |
-| **Automatisation** | Suites automatisées pérennes (xUnit, Selenium avec POM). |
-| **Traçabilité** | Mapping exhaustif Exigences -> Tests -> Résultats. |
+| **Niveaux de Test**        | Couverture des trois niveaux : Unitaire, Intégration et Système (E2E).  |
+| **Techniques de Test**     | Alternance entre techniques de Boîte Blanche et de Boîte Noire.         |
+| **Automatisation**         | Suites automatisées pérennes (xUnit, Selenium avec POM).                |
+| **Traçabilité**            | Mapping exhaustif Exigences -> Tests -> Résultats.                      |
 
 ---
 
@@ -51,38 +51,38 @@ Nous avons choisi la **Sécurité informatique** (Access Control) comme axe maje
 
 ### 4.1 Registre des Anomalies Statiques Détectées
 
-| ID | Localisation | Anomalie | Gravité | Recommandation |
-| :--- | :--- | :--- | :--- | :--- |
-| **AN-01** | `OrderController` | IDOR : Manque de vérification de propriété sur les commandes. | **Critique** | Valider le `UserId` via le Token JWT sécurisé. |
-| **AN-02** | `DTOs/OrderCreate` | Trust Boundary Violation : `UserId` falsifiable par le client. | **Majeure** | Utiliser l'identité du serveur uniquement. |
-| **AN-03** | `AuthService` | Absence de Logging d'audit sur les échecs de connexion. | **Mineure** | Injecter `ILogger` pour tracer les échecs suspects. |
+| ID        | Localisation       | Anomalie                                                       | Gravité      | Recommandation                                      |
+| :-------- | :----------------- | :------------------------------------------------------------- | :----------- | :-------------------------------------------------- |
+| **AN-01** | `OrderController`  | IDOR : Manque de vérification de propriété sur les commandes.  | **Critique** | Valider le `UserId` via le Token JWT sécurisé.      |
+| **AN-02** | `DTOs/OrderCreate` | Trust Boundary Violation : `UserId` falsifiable par le client. | **Majeure**  | Utiliser l'identité du serveur uniquement.          |
+| **AN-03** | `AuthService`      | Absence de Logging d'audit sur les échecs de connexion.        | **Mineure**  | Injecter `ILogger` pour tracer les échecs suspects. |
 
 ---
 
 ## 5. Catalogue Récapitulatif des Cas de Test
 
-| ID | Titre du Cas de Test | Niveau | Type | Technique | Outil / Fichier | Statut |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **CT-01** | Login réussi (User) | Système | Fonc. | B. Noire | Selenium / POM | ✅ Pass |
-| **CT-02** | Rejet mot de passe incorrect | Système | Fonc. | B. Noire | Selenium / POM | ✅ Pass |
-| **CT-03** | Blocage AuthGuard Angular | Système | Sécu. | B. Noire | Selenium / POM | ✅ Pass |
-| **CT-04** | Génération technique Token | Unitaire | Fonc. | B. Blanche | `AuthServiceTests` | ✅ Pass |
-| **CT-05** | Levée d'exception Auth | Unitaire | Fonc. | B. Blanche | `AuthServiceTests` | ✅ Pass |
-| **CT-06** | Protection énumération comptes | Unitaire | Fonc. | B. Blanche | `AuthServiceTests` | ✅ Pass |
-| **CT-07** | Anonyme -> GET /orders | Intégra. | Sécu. | B. Noire | `OrderIntegration` | ✅ Pass |
-| **CT-08** | Anonyme -> POST /orders | Intégra. | Sécu. | B. Noire | `OrderIntegration` | ✅ Pass |
-| **CT-09** | Anonyme -> POST /products | Intégra. | Sécu. | B. Noire | `OrderIntegration` | ✅ Pass |
-| **CT-10** | Inscription réussie (E2E) | Système | Fonc. | B. Noire | Selenium / POM | ✅ Pass |
-| **CT-11** | Détection doublon email | Système | Fonc. | B. Noire | Selenium / POM | ✅ Pass |
-| **CT-12** | Affichage grille produits | Système | Fonc. | B. Noire | Selenium / POM | ✅ Pass |
-| **CT-13** | API détail produit | Intégra. | Fonc. | B. Noire | `ProductIntegration`| ✅ Pass |
-| **CT-14** | Rôle User -> Create Product | Intégra. | Sécu. | B. Noire | `SecurityIntegration`| ✅ Pass |
-| **CT-15** | Rôle Admin -> Create Product | Intégra. | Fonc. | B. Noire | `AdminIntegration` | ✅ Pass |
-| **CT-16** | Filtrage historique personnel | Intégra. | Fonc. | B. Noire | `OrderIntegration` | ✅ Pass |
-| **CT-17** | Validation flux Checkout | Intégra. | Fonc. | B. Noire | `OrderIntegration` | ✅ Pass |
-| **CT-18** | Isolation IDOR (Ordre fixe) | Intégra. | Sécu. | B. Noire | `SecurityIntegration`| ❌ Fail |
-| **CT-19** | Accès RBAC Analytics | Intégra. | Sécu. | B. Noire | `SecurityIntegration`| ❌ Fail |
-| **CT-20** | Vérification vulnérabilité IDOR | Intégra. | Sécu. | B. Noire | `VulnerabilityTests` | ❌ Fail |
+| ID        | Titre du Cas de Test            | Niveau   | Type  | Technique  | Outil / Fichier       | Statut |
+| :-------- | :------------------------------ | :------- | :---- | :--------- | :-------------------- | :----- |
+| **CT-01** | Login réussi (User)             | Système  | Fonc. | B. Noire   | Selenium / POM        | ✅ Pass |
+| **CT-02** | Rejet mot de passe incorrect    | Système  | Fonc. | B. Noire   | Selenium / POM        | ✅ Pass |
+| **CT-03** | Blocage AuthGuard Angular       | Système  | Sécu. | B. Noire   | Selenium / POM        | ✅ Pass |
+| **CT-04** | Génération technique Token      | Unitaire | Fonc. | B. Blanche | `AuthServiceTests`    | ✅ Pass |
+| **CT-05** | Levée d'exception Auth          | Unitaire | Fonc. | B. Blanche | `AuthServiceTests`    | ✅ Pass |
+| **CT-06** | Protection énumération comptes  | Unitaire | Fonc. | B. Blanche | `AuthServiceTests`    | ✅ Pass |
+| **CT-07** | Anonyme -> GET /orders          | Intégra. | Sécu. | B. Noire   | `OrderIntegration`    | ✅ Pass |
+| **CT-08** | Anonyme -> POST /orders         | Intégra. | Sécu. | B. Noire   | `OrderIntegration`    | ✅ Pass |
+| **CT-09** | Anonyme -> POST /products       | Intégra. | Sécu. | B. Noire   | `OrderIntegration`    | ✅ Pass |
+| **CT-10** | Inscription réussie (E2E)       | Système  | Fonc. | B. Noire   | Selenium / POM        | ✅ Pass |
+| **CT-11** | Détection doublon email         | Système  | Fonc. | B. Noire   | Selenium / POM        | ✅ Pass |
+| **CT-12** | Affichage grille produits       | Système  | Fonc. | B. Noire   | Selenium / POM        | ✅ Pass |
+| **CT-13** | API détail produit              | Intégra. | Fonc. | B. Noire   | `ProductIntegration`  | ✅ Pass |
+| **CT-14** | Rôle User -> Create Product     | Intégra. | Sécu. | B. Noire   | `SecurityIntegration` | ✅ Pass |
+| **CT-15** | Rôle Admin -> Create Product    | Intégra. | Fonc. | B. Noire   | `AdminIntegration`    | ✅ Pass |
+| **CT-16** | Filtrage historique personnel   | Intégra. | Fonc. | B. Noire   | `OrderIntegration`    | ✅ Pass |
+| **CT-17** | Validation flux Checkout        | Intégra. | Fonc. | B. Noire   | `OrderIntegration`    | ✅ Pass |
+| **CT-18** | Isolation IDOR (Ordre fixe)     | Intégra. | Sécu. | B. Noire   | `SecurityIntegration` | ❌ Fail |
+| **CT-19** | Accès RBAC Analytics            | Intégra. | Sécu. | B. Noire   | `SecurityIntegration` | ❌ Fail |
+| **CT-20** | Vérification vulnérabilité IDOR | Intégra. | Sécu. | B. Noire   | `VulnerabilityTests`  | ❌ Fail |
 
 ---
 
@@ -116,18 +116,31 @@ Nous avons choisi la **Sécurité informatique** (Access Control) comme axe maje
 
 ## 8. Matrice de Traçabilité des Exigences
 
-| ID Exigence | Description Métier | CT Associés | Statut Final |
-| :--- | :--- | :--- | :--- |
-| **REQ-AUTH-01** | Authentification JWT sécurisée | **CT-01, 04, 05, 06** | Qualifiée (✅) |
-| **REQ-SEC-01** | Protection par défaut de l'API | **CT-07, 08, 09, 14** | Qualifiée (✅) |
-| **REQ-SEC-02** | Isolation IDOR des commandes | **CT-18, 20** | **Anomalie (❌)** |
-| **REQ-ORD-01** | Processus de checkout | **CT-16, 17** | Qualifiée (✅) |
+| ID Exigence     | Description Métier             | CT Associés           | Statut Final     |
+| :-------------- | :----------------------------- | :-------------------- | :--------------- |
+| **REQ-AUTH-01** | Authentification JWT sécurisée | **CT-01, 04, 05, 06** | Qualifiée (✅)    |
+| **REQ-SEC-01**  | Protection par défaut de l'API | **CT-07, 08, 09, 14** | Qualifiée (✅)    |
+| **REQ-SEC-02**  | Isolation IDOR des commandes   | **CT-18, 20**         | **Anomalie (❌)** |
+| **REQ-ORD-01**  | Processus de checkout          | **CT-16, 17**         | Qualifiée (✅)    |
 
 ---
 
-## 9. Conclusion Finale et Recommandations
+## 9. Déclaration d'Usage de l'Intelligence Artificielle
+
+Conformément aux bonnes pratiques académiques en vigueur, nous déclarons avoir recouru à des outils d'IA générative au cours de ce projet, dans un cadre complémentaire et supervisé.
+
+**Usages effectifs :**
+- Génération de la structure initiale des squelettes de tests (boilerplate xUnit, Selenium).
+- Aide à la reformulation et à la mise en forme de certains passages documentaires.
+- Assistance au débogage de configurations techniques (setup du `WebApplicationFactory`, `conftest.py`).
+
+**Ce qui a été réalisé par les auteurs :**
+L'ensemble de la **stratégie de test**, la **définition des cas de test**, l'**analyse des résultats**, l'**interprétation des anomalies** (notamment la vulnérabilité IDOR) et les **décisions de correction** ont été conduits exclusivement par Youssef Chaari et Mohamed Aziz Zouari. Chaque résultat a fait l'objet d'une vérification manuelle.
+
+---
+
+## 10. Conclusion Finale et Recommandations
 
 L'application **BiProject** présente une maturité fonctionnelle élevée sur ses parcours nominaux (85% de succès). Cependant, la présence de failles critiques de type **IDOR** identifiées par l'audit nécessite des correctifs immédiats. La mise en œuvre d'une pipeline CI/CD automatisant ces tests est recommandée pour pérenniser la qualité du système.
 
 ---
-*Fin du Rapport Final.*
