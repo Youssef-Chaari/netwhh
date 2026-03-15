@@ -4,6 +4,19 @@ from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
+def pytest_configure(config):
+    """Configuration dynamique du rapport HTML s'il n'est pas spécifié en CLI."""
+    if not config.getoption("htmlpath"):
+        # Création du dossier results si nécessaire
+        results_dir = os.path.join(os.path.dirname(__file__), "results")
+        if not os.path.exists(results_dir):
+            os.makedirs(results_dir)
+            
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M")
+        report_name = f"Selenium_Tests_{timestamp}.html"
+        config.option.htmlpath = os.path.join(results_dir, report_name)
+        config.option.self_contained_html = True
+
 @pytest.fixture(scope="function")
 def driver():
     options = Options()

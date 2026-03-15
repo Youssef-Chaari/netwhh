@@ -55,12 +55,14 @@ Ouvrez un **troisième terminal** pour les commandes suivantes :
 ```powershell
 dotnet test BiProject.Tests
 ```
+*Le rapport HTML horodaté est généré automatiquement dans `BiProject.Tests/TestResults/`.*
 
 ### Tests Système (Selenium)
 ```powershell
 # S'assurer d'être à la racine du projet
 py -m pytest tests_selenium/tests -v
 ```
+*Le rapport HTML horodaté est généré automatiquement dans `tests_selenium/results/`.*
 
 ### Tests Robot Framework (Bonus)
 ```powershell
@@ -94,7 +96,7 @@ Voici l'ordre recommandé pour "vendre" votre projet en 5 minutes :
 | **Run Backend** | `dotnet run` (dans BiProject.Api) |
 | **Run Frontend** | `npm start` (dans BiProject.Ui) |
 | **Tests C#** | `dotnet test BiProject.Tests` |
-| **Tests Selenium** | `py -m pytest tests_selenium/tests` |
+| **Tests Selenium** | `py -m pytest` |
 | **Tests Robot** | `py -m robot tests_robot/login_tests.robot` |
 
 ---

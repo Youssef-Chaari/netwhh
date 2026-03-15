@@ -39,6 +39,7 @@ Simulation de parcours utilisateurs complets dans le navigateur.
 - **Total** : 6 tests
 - **Statut** : 6 ✅ Pass (100%)
 - **Outil** : Selenium + POM
+- **Rapport** : `tests_selenium/results/report.html`
 
 ### 2.4 Tests Système (Robot Framework)
 Validation croisée des scénarios critiques.
@@ -64,6 +65,7 @@ Validation croisée des scénarios critiques.
 ```powershell
 dotnet test BiProject.Tests
 ```
+*Le rapport HTML horodaté est généré automatiquement.*
 
 ### Système (UI)
 ```powershell
@@ -73,4 +75,3 @@ py -m robot --outputdir tests_robot/results tests_robot/login_tests.robot
 ```
 
 ---
-*Fin du rapport d'exécution.*
