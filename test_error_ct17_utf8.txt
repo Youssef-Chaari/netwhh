@@ -1,0 +1,28 @@
+﻿  Determining projects to restore...
+  All projects are up-to-date for restore.
+  BiProject.Api -> D:\projet\BiProject\BiProject.Api\bin\Debug\net10.0\BiProject.Api.dll
+  BiProject.Tests -> D:\projet\BiProject\BiProject.Tests\bin\Debug\net10.0\BiProject.Tests.dll
+Test run for D:\projet\BiProject\BiProject.Tests\bin\Debug\net10.0\BiProject.Tests.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.1 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+dotnet : [xUnit.net 00:00:03.50]     BiProject.Tests.Integration.OrderContr
+ollerIntegrationTests.CreateOrder_AsUser_ReturnsCreated [FAIL]
+At line:1 char:1
++ dotnet test BiProject.Tests --filter "FullyQualifiedName=BiProject.Te ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([xUnit.net 00:0...sCreated [F 
+   AIL]:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  Failed BiProject.Tests.Integration.OrderControllerIntegrationTests.CreateOrder_AsUser_ReturnsCreated [3 s]
+  Error Message:
+   System.InvalidOperationException : Sequence contains no matching element
+  Stack Trace:
+     at System.Linq.ThrowHelper.ThrowNoMatchException()
+   at System.Linq.Enumerable.First[TSource](IEnumerable`1 source, Func`2 predicate)
+   at BiProject.Tests.Integration.OrderControllerIntegrationTests.CreateOrder_AsUser_ReturnsCreated() in D:\projet\BiProject\BiProject.Tests\OrderIntegrationTests.cs:line 65
+--- End of stack trace from previous location ---
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 3 s - BiProject.Tests.dll (net10.0)

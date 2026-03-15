@@ -1,0 +1,26 @@
+﻿  Determining projects to restore...
+  All projects are up-to-date for restore.
+  BiProject.Api -> D:\projet\BiProject\BiProject.Api\bin\Debug\net10.0\BiProject.Api.dll
+  BiProject.Tests -> D:\projet\BiProject\BiProject.Tests\bin\Debug\net10.0\BiProject.Tests.dll
+Test run for D:\projet\BiProject\BiProject.Tests\bin\Debug\net10.0\BiProject.Tests.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.1 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+dotnet : [xUnit.net 00:00:04.85]     BiProject.Tests.Integration.SecurityIn
+tegrationTests.GetOrder_Isolation_ReturnsForbidden_ForOtherUserOrder [FAIL]
+At line:1 char:1
++ dotnet test BiProject.Tests --filter "FullyQualifiedName=BiProject.Te ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([xUnit.net 00:0...serOrder [F 
+   AIL]:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  Failed BiProject.Tests.Integration.SecurityIntegrationTests.GetOrder_Isolation_ReturnsForbidden_ForOtherUserOrder [4 s]
+  Error Message:
+   Security Gap: IDOR possible on orders. Received: OK
+  Stack Trace:
+     at BiProject.Tests.Integration.SecurityIntegrationTests.GetOrder_Isolation_ReturnsForbidden_ForOtherUserOrder() in D:\projet\BiProject\BiProject.Tests\SecurityIntegrationTests.cs:line 106
+--- End of stack trace from previous location ---
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 4 s - BiProject.Tests.dll (net10.0)

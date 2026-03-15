@@ -22,8 +22,8 @@ Ce tableau relie les exigences fonctionnelles et non-fonctionnelles du système 
 | REQ-ORD-01 | Consultation de ses propres commandes | CT-16 | Intégration (Backend) | Fonctionnel | Boîte noire | `OrderIntegrationTests.cs` | ✅ Pass |
 | REQ-ORD-02 | Passage d'une commande valide | CT-17 | Intégration (Backend) | Fonctionnel | Boîte noire | `OrderIntegrationTests.cs` | ✅ Pass |
 | REQ-SEC-02 | Identification d'anomalies (IDOR, Trust Boundary, Logging, Structure) | CT-ST-01 | Statique | Sécurité / Qualité | Revues & Inspections | Plusieurs fichiers | ✅ 3 anomalies détectées |
-| REQ-SEC-02 | Protection contre l'accès IDOR aux commandes | CT-18 | Intégration (Backend) | Sécurité | Boîte noire | `SecurityIntegrationTests.cs` | ✅ Pass |
-| REQ-SEC-03 | Restriction Admin sur Analytics BI | CT-19 | Intégration (Backend) | Sécurité | Boîte noire | `SecurityIntegrationTests.cs` | ✅ Pass |
+| REQ-SEC-02 | Protection contre l'accès IDOR aux commandes | CT-18 | Intégration (Backend) | Sécurité | Boîte noire | `SecurityIntegrationTests.cs` | ❌ Fail |
+| REQ-SEC-03 | Restriction Admin sur Analytics BI | CT-19 | Intégration (Backend) | Sécurité | Boîte noire | `SecurityIntegrationTests.cs` | ❌ Fail |
 | — | Validation de la faille IDOR (Preuve dynamique) | CT-BUG-01 | Intégration (Backend) | Sécurité | Boîte noire | `VulnerabilityExploitTests.cs` | ❌ Fail |
 
 ### Démonstration de Vulnérabilités (Dynamic Bug Exploit)

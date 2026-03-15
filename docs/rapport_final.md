@@ -39,6 +39,7 @@ La stratégie adoptée suit la **Pyramide des Tests** pour maximiser la couvertu
 ---
 
 ## 4. Tests statiques (Barème : 5%)
+**Statistiques globales : 20 tests exécutés (17 Pass / 3 Fail révélateurs) — 85% de succès.**
 Trois activités statiques majeures ont permis de détecter des défauts structurels précoces :
 1. **Revue de Code** : Identification manuelle d'une vulnérabilité **IDOR** critique dans `OrderController.cs` et d'une violation de frontière de confiance (Trust Boundary) dans les DTOs.
 2. **Analyse de Sécurité** : Audit orienté OWASP (Broken Access Control).
@@ -50,7 +51,7 @@ Trois activités statiques majeures ont permis de détecter des défauts structu
 ## 5. Cas de test fonctionnels et non fonctionnels (Barème : 25%)
 
 ### 5.1 Bilan des Cas Exécutés
-Un total de **14 cas de test uniques** ont été automatisés et exécutés :
+Un total de **19 cas de test uniques** ont été automatisés et exécutés :
 - **8 Tests Backend** (Unitaires + Intégration)
 - **6 Tests Selenium** (Système / E2E)
 
@@ -58,8 +59,11 @@ Un total de **14 cas de test uniques** ont été automatisés et exécutés :
 - **Fonctionnels** : Validation des parcours nominaux (Login ok) et alternatifs (Mauvais mdp, doublon inscription).
 - **Non-fonctionnels (Sécurité)** : Tests de privilèges (User vs Admin) et test de validation de propriété (IDOR).
 
-### 5.3 Focus : Cas CT-BUG-01
-Contrairement aux autres tests, **CT-BUG-01** est un test de validation de propriété de sécurité. Son échec (HTTP `200 OK` obtenu au lieu de `403/404`) constitue la preuve dynamique formelle de la faille IDOR identifiée en statique.
+### 5.3 Focus : Tests de Validation Sécurité (Successive Fails)
+Contrairement aux autres tests, **CT-BUG-01**, **CT-18** et **CT-19** sont des tests de validation de propriété de sécurité. Leurs échecs (Accès autorisé au lieu de bloqué) constituent les preuves dynamiques formelles des failles de contrôle d'accès identifiées.
+- **CT-BUG-01** : Faille IDOR sur les commandes (Preuve dynamique).
+- **CT-18** : Isolation IDOR sur les commandes (Preuve sur identifiant fixe).
+- **CT-19** : Absence de restriction de rôle sur les données stratégiques Analytics.
 
 ---
 
@@ -86,9 +90,9 @@ La cohérence documentaire est assurée par une matrice de traçabilité reliant
 ---
 
 ## 8. Résultats d'exécution détaillés
-| **Backend (Unit/Intégration)** | 8 | 7 | 1 (BUG) | 4 (CT-13, 15, 18, 19) |
-| **Selenium (E2E)** | 6 | 6 | 0 | 2 (CT-16, 17) |
-| **TOTAL** | **14** | **13** | **1** | **6** |
+| **Backend (Unit/Intégration)** | 14 | 11 | 3 (SEC) | 0 (Tous exécutés) |
+| **Selenium (E2E)** | 6 | 6 | 0 | 0 (Tous exécutés) |
+| **TOTAL** | **20** | **17** | **3** | **0** |
 
 *Note sur le fail : L'échec du test Backend valide l'existence d'une anomalie critique.*
 
@@ -98,6 +102,7 @@ La cohérence documentaire est assurée par une matrice de traçabilité reliant
 1. **AN-01 (IDOR)** : Faille critique dans `OrderController`. Possibilité de consulter les commandes de n'importe quel utilisateur.
 2. **AN-02 (Trust Boundary)** : L'API accepte un `UserId` venant du client, permettant une usurpation d'identité lors des commandes.
 3. **AN-03 (Logging)** : Absence de traces sur les échecs d'authentification (risque de brute-force non détecté).
+4. **AN-04 (Broken Access Control - Analytics)** : L'endpoint `/api/analytics/kpis` n'est pas restreint au rôle Admin, exposant des données BI à n'importe quel utilisateur (Confirmé par CT-19).
 
 ---
 

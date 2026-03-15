@@ -504,7 +504,7 @@ Confirmer la capacité de l'utilisateur à consulter la liste des produits aprè
 - **Revue par** : Youssef Chaari
 - **Version** : 1.1
 - **Nom du testeur** : Mohamed Aziz Zouari
-- **Date de test** : 2026-03-14
+- **Date de test** : 2026-03-15
 - **Cas de test** : ✅ Pass
 
 #### 2. Complément Méthodologique
@@ -583,7 +583,7 @@ Valider le moteur de permissions en s'assurant qu'un utilisateur standard ne peu
 - **Revue par** : Youssef Chaari
 - **Version** : 1.1
 - **Nom du testeur** : Mohamed Aziz Zouari
-- **Date de test** : 2026-03-14
+- **Date de test** : 2026-03-15
 - **Cas de test** : ✅ Pass
 
 #### 2. Complément Méthodologique
@@ -662,7 +662,7 @@ Vérifier que le système interdit la lecture d'une commande appartenant à un t
 - **Revue par** : Youssef Chaari
 - **Version** : 1.1
 - **Nom du testeur** : Mohamed Aziz Zouari
-- **Date de test** : 2026-03-14
+- **Date de test** : 2026-03-15
 - **Cas de test** : ✅ Pass (Vérifié via Intégration Backend)
 
 #### 2. Complément Méthodologique
@@ -701,7 +701,7 @@ S'assurer que l'utilisateur ne visualise que son historique de commandes personn
 - **Revue par** : Mohamed Aziz Zouari
 - **Version** : 1.1
 - **Nom du testeur** : Youssef Chaari
-- **Date de test** : 2026-03-14
+- **Date de test** : 2026-03-15
 - **Cas de test** : ✅ Pass (Vérifié via Intégration Backend)
 
 #### 2. Complément Méthodologique
@@ -741,8 +741,8 @@ Valider la chaîne complète d'achat depuis la sélection jusqu'à l'enregistrem
 - **Revue par** : Youssef Chaari
 - **Version** : 1.1
 - **Nom du testeur** : Mohamed Aziz Zouari
-- **Date de test** : 2026-03-14
-- **Cas de test** : ✅ Pass (Isolation validée après CT-BUG-01)
+- **Date de test** : 2026-03-15
+- **Cas de test** : ❌ Fail (Validation Fail IDOR)
 
 #### 2. Complément Méthodologique
 - **Niveau** : Tests d’intégration (Backend)
@@ -767,7 +767,7 @@ Validation "post-corrective" de l'étanchéité des ressources utilisateur.
 #### 6. Étapes
 | Etape # | Étapes | Résultats Attendus | Résultats Réels | Pass / Fail / Blocked |
 |---|---|---|---|---|
-| 1 | Lecture resource tiers | HTTP `403 Forbidden` | Accès refusé par l'API | Pass |
+| 1 | Lecture resource tiers | HTTP `403 Forbidden` | HTTP `200 OK` (Accès illégitime autorisé) | Fail |
 
 ---
 
@@ -780,8 +780,8 @@ Validation "post-corrective" de l'étanchéité des ressources utilisateur.
 - **Revue par** : Mohamed Aziz Zouari
 - **Version** : 1.1
 - **Nom du testeur** : Youssef Chaari
-- **Date de test** : 2026-03-14
-- **Cas de test** : ✅ Pass (Restriction vérifiée via Code 403)
+- **Date de test** : 2026-03-15
+- **Cas de test** : ❌ Fail (Accès illégitime 200 OK constaté)
 
 #### 2. Complément Méthodologique
 - **Niveau** : Tests d’intégration (Backend)

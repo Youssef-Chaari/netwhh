@@ -8,6 +8,8 @@ using BiProject.Api.DTOs.Auth;
 using System.Text.Json;
 using System.Net.Http.Headers;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 
 namespace BiProject.Tests.Integration
 {
@@ -57,8 +59,21 @@ namespace BiProject.Tests.Integration
 
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
+            // Extraction du UserId depuis le JWT (Nécessaire car le DTO l'exige)
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(token);
+            var userIdStr = jwtToken.Claims.FirstOrDefault(c => c.Type == "nameid")?.Value 
+                         ?? jwtToken.Claims.FirstOrDefault(c => c.Type == "sub")?.Value
+                         ?? jwtToken.Claims.First(c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value;
+            var userId = int.Parse(userIdStr);
+
             // Payload for creating an order
-            var orderDto = new { ProductIds = new[] { 1 } };
+            var orderDto = new { 
+                UserId = userId,
+                Items = new[] { 
+                    new { ProductId = 1, Quantity = 1 } 
+                } 
+            };
 
             var response = await _client.PostAsJsonAsync("/api/orders", orderDto);
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
@@ -89,7 +104,7 @@ namespace BiProject.Tests.Integration
             // On crée une commande pour être sûr d'avoir de la donnée
             await _client.PostAsJsonAsync("/api/orders", new { ProductIds = new[] { 1 } });
 
-            var response = await _client.GetAsync("/api/orders");
+            var response = await _client.GetAsync("/api/orders/my-orders");
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
