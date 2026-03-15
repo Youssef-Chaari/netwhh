@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.14.3 on win32)" generated="2026-03-15T03:51:10.698586" rpa="false" schemaversion="5">
+<suite id="s1" name="Login Tests" source="D:\projet\BiProject\tests_robot\login_tests.robot">
+<test id="s1-t1" name="Connexion Réussie Via Robot Framework" line="13">
+<kw name="Ouvrir Le Navigateur Sur La Page De Connexion">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-03-15T03:51:10.944819" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:4200/login'.</msg>
+<arg>${BASE_URL}/login</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-03-15T03:51:10.944554" elapsed="13.530600"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-03-15T03:51:24.475370" elapsed="0.043400"/>
+</kw>
+<kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
+<arg>5 seconds</arg>
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<status status="PASS" start="2026-03-15T03:51:24.519165" elapsed="0.001787"/>
+</kw>
+<status status="PASS" start="2026-03-15T03:51:10.943875" elapsed="13.577258"/>
+</kw>
+<kw name="Saisir Les Identifiants">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-03-15T03:51:24.524942" level="INFO">Typing text 'test_user' into text field 'css:input[formControlName='username']'.</msg>
+<arg>css:input[formControlName='username']</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-03-15T03:51:24.523494" elapsed="0.159772"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-03-15T03:51:24.684071" level="INFO">Typing text 'TestPassword123!' into text field 'css:input[formControlName='password']'.</msg>
+<arg>css:input[formControlName='password']</arg>
+<arg>${password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-03-15T03:51:24.683522" elapsed="0.144483"/>
+</kw>
+<arg>${VALID_USER}</arg>
+<arg>${VALID_PWD}</arg>
+<status status="PASS" start="2026-03-15T03:51:24.521881" elapsed="0.306248"/>
+</kw>
+<kw name="Soumettre Le Formulaire">
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-03-15T03:51:24.828961" level="INFO">Clicking button 'css:button[type='submit']'.</msg>
+<arg>css:button[type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-03-15T03:51:24.828788" elapsed="0.110469"/>
+</kw>
+<status status="PASS" start="2026-03-15T03:51:24.828523" elapsed="0.110897"/>
+</kw>
+<kw name="Vérifier La Redirection Vers Le Catalogue">
+<kw name="Wait Until Location Contains" owner="SeleniumLibrary">
+<arg>/products</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the current URL contains ``expected``.</doc>
+<status status="PASS" start="2026-03-15T03:51:24.940009" elapsed="7.088412"/>
+</kw>
+<kw name="Location Should Contain" owner="SeleniumLibrary">
+<msg time="2026-03-15T03:51:32.033376" level="INFO">Current location contains '/products'.</msg>
+<arg>/products</arg>
+<doc>Verifies that the current URL contains ``expected``.</doc>
+<status status="PASS" start="2026-03-15T03:51:32.028593" elapsed="0.004871"/>
+</kw>
+<status status="PASS" start="2026-03-15T03:51:24.939746" elapsed="7.093809"/>
+</kw>
+<kw name="Fermer Le Navigateur" type="TEARDOWN">
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-03-15T03:51:32.034568" elapsed="2.432136"/>
+</kw>
+<status status="PASS" start="2026-03-15T03:51:32.034035" elapsed="2.432912"/>
+</kw>
+<doc>Vérifie qu'un utilisateur peut se connecter avec Robot Framework.</doc>
+<status status="PASS" start="2026-03-15T03:51:10.943115" elapsed="23.524108"/>
+</test>
+<test id="s1-t2" name="Consultation Du Catalogue Après Connexion" line="21">
+<kw name="Ouvrir Le Navigateur Sur La Page De Connexion">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-03-15T03:51:34.469049" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:4200/login'.</msg>
+<arg>${BASE_URL}/login</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-03-15T03:51:34.468818" elapsed="1.454527"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-03-15T03:51:35.923535" elapsed="0.043378"/>
+</kw>
+<kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
+<arg>5 seconds</arg>
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<status status="PASS" start="2026-03-15T03:51:35.967136" elapsed="0.005566"/>
+</kw>
+<status status="PASS" start="2026-03-15T03:51:34.468530" elapsed="1.504357"/>
+</kw>
+<kw name="Saisir Les Identifiants">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-03-15T03:51:35.974847" level="INFO">Typing text 'test_user' into text field 'css:input[formControlName='username']'.</msg>
+<arg>css:input[formControlName='username']</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-03-15T03:51:35.974602" elapsed="0.143876"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-03-15T03:51:36.119691" level="INFO">Typing text 'TestPassword123!' into text field 'css:input[formControlName='password']'.</msg>
+<arg>css:input[formControlName='password']</arg>
+<arg>${password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-03-15T03:51:36.118847" elapsed="0.142329"/>
+</kw>
+<arg>${VALID_USER}</arg>
+<arg>${VALID_PWD}</arg>
+<status status="PASS" start="2026-03-15T03:51:35.973813" elapsed="0.287482"/>
+</kw>
+<kw name="Soumettre Le Formulaire">
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-03-15T03:51:36.262444" level="INFO">Clicking button 'css:button[type='submit']'.</msg>
+<arg>css:button[type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-03-15T03:51:36.262131" elapsed="0.114302"/>
+</kw>
+<status status="PASS" start="2026-03-15T03:51:36.261644" elapsed="0.114941"/>
+</kw>
+<kw name="Vérifier La Présence Des Produits Dans La Grille">
+<kw name="Vérifier La Redirection Vers Le Catalogue">
+<kw name="Wait Until Location Contains" owner="SeleniumLibrary">
+<arg>/products</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the current URL contains ``expected``.</doc>
+<status status="PASS" start="2026-03-15T03:51:36.377535" elapsed="0.626706"/>
+</kw>
+<kw name="Location Should Contain" owner="SeleniumLibrary">
+<msg time="2026-03-15T03:51:37.016038" level="INFO">Current location contains '/products'.</msg>
+<arg>/products</arg>
+<doc>Verifies that the current URL contains ``expected``.</doc>
+<status status="PASS" start="2026-03-15T03:51:37.004532" elapsed="0.011603"/>
+</kw>
+<status status="PASS" start="2026-03-15T03:51:36.377243" elapsed="0.638993"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:.grid &gt; div.glass-panel</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-03-15T03:51:37.016427" elapsed="0.077231"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2026-03-15T03:51:37.106877" level="INFO">Current page contains element 'css:.grid &gt; div.glass-panel'.</msg>
+<arg>css:.grid &gt; div.glass-panel</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2026-03-15T03:51:37.093971" elapsed="0.013059"/>
+</kw>
+<status status="PASS" start="2026-03-15T03:51:36.376892" elapsed="0.730297"/>
+</kw>
+<kw name="Fermer Le Navigateur" type="TEARDOWN">
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-03-15T03:51:37.108440" elapsed="2.567501"/>
+</kw>
+<status status="PASS" start="2026-03-15T03:51:37.107790" elapsed="2.568262"/>
+</kw>
+<doc>Vérifie que le catalogue est visible après authentification.</doc>
+<status status="PASS" start="2026-03-15T03:51:34.467937" elapsed="5.208309"/>
+</test>
+<doc>Scénario de test Bonus avec Robot Framework.
+Ce test démontre l'utilisation de keywords lisibles pour l'authentification.</doc>
+<status status="PASS" start="2026-03-15T03:51:10.700069" elapsed="28.977044"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Login Tests" id="s1" pass="2" fail="0" skip="0">Login Tests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

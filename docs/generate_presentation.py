@@ -20,9 +20,9 @@ def create_presentation():
         ["Analyse Statique & Sécurité", "- 3 Anomalies majeures détectées (IDOR, Trust Boundary, Logging)\n- Traçabilité : Matrice reliant 100% des exigences aux cas de test"],
         ["Tests d'Intégration & Preuve de Bug", "- Le cas CT-20 : Validation dynamique de la faille IDOR\n- Résultat : Échec révélateur (Accès 200 OK non autorisé)\n- Correction & Régression : Test CT-18 validé"],
         ["Automatisation Selenium (Principal)", "- Architecture POM (Page Object Model)\n- Robustesse : BasePage & Explicit Waits\n- Observabilité : Captures d'écran automatiques sur échec"],
-        ["Bonus : Robot Framework (Prototype)", "- Approche Keyword-Driven : Lisibilité maximale\n- Scénarios : Login & Consultation catalogue\n- Objectif : Polyvalence technologique (Pytest vs Robot)"],
+        ["Bonus : Robot Framework (Prototype)", "- Approche Keyword-Driven : Lisibilité maximale\n- Non exécuté officiellement (Preuve de concept)\n- Objectif : Polyvalence technologique (Pytest vs Robot)"],
         ["Indicateurs & Bilan Final", "- 20 Cas de tests couverts\n- 85% de taux de réussite (17/20 Pass)\n- Livrables : Catalogue, Rapports, Screenshots"],
-        ["Conclusion & Questions", "Projet Conforme, Sécurisé et Maintenable.\nMerci de votre attention !"]
+        ["Conclusion & Questions", "Projet Conforme, Audité et Maintenable.\nMerci de votre attention !"]
     ]
 
     for title_text, body_text in slides_content:

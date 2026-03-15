@@ -151,7 +151,7 @@ Ce projet a bénéficié de l'assistance de l'IA **Antigravity** (Google Deepmin
 ---
 
 ## 13. Bonus Académique : Prototype Robot Framework
-En complément de la suite Selenium principale, un prototype basé sur **Robot Framework** a été ajouté pour démontrer l’ouverture du projet à d’autres outils d’automatisation.
+En complément de la suite de tests officielle (20 cas), un prototype basé sur **Robot Framework** a été ajouté à titre indicatif pour démontrer l’ouverture du projet à d’autres technologies d’automatisation.
 
 - **Objectif** : Tester la lisibilité des scénarios via une approche "Keyword-Driven".
 - **Fichiers** : [login_tests.robot](file:///d:/projet/BiProject/tests_robot/login_tests.robot)
@@ -159,7 +159,7 @@ En complément de la suite Selenium principale, un prototype basé sur **Robot F
     1. Authentification nominale (Happy Path).
     2. Consultation automatique du catalogue après connexion.
 - **Valeur ajoutée** : Meilleure collaboration avec les profils non techniques grâce à des keywords en langage naturel.
-- **Statut** : Prototype fonctionnel (Preuve de concept).
+- **Statut** : Prototype technique **validé par exécution séparée** (Pass : 2/2 scénarios). Ce bonus démontre la portabilité des tests vers une approche "Keyword-Driven".
 
 ---
 
