@@ -6,7 +6,7 @@
 - **Créé par :** Youssef Chaari & Mohamed Aziz Zouari
 - **Revue par :** Youssef Chaari & Mohamed Aziz Zouari
 - **Date de création :** 2026-03-12
-- **Dernière mise à jour :** 2026-03-14
+- **Dernière mise à jour :** 2026-03-15
 
 ---
 
@@ -270,7 +270,7 @@ Confirmer que le service rejette uniformément les utilisateurs non référencé
 #### 2. Complément Méthodologique
 - **Niveau** : Tests d’intégration (Backend)
 - **Type** : Non fonctionnel — Sécurité
-- **Technique** : Boîte noire — Test de contrôle d'accès
+- **Technique** : Boîte noire — test de contrôle d’accès
 - **Motivation** : Vérifier que la configuration ASP.NET `[Authorize]` fonctionne au niveau HTTP réel, pas seulement en code
 - **Fichier** : `BiProject.Tests/OrderIntegrationTests.cs`
 
@@ -309,7 +309,7 @@ Valider que la protection de l'API bloque l'accès aux commandes pour tout clien
 #### 2. Complément Méthodologique
 - **Niveau** : Tests d’intégration (Backend)
 - **Type** : Non fonctionnel — Sécurité
-- **Technique** : Boîte noire — Test de contrôle d'accès
+- **Technique** : Boîte noire — test de contrôle d’accès
 - **Motivation** : Valider la protection des opérations d'écriture sur les ressources métier
 - **Fichier** : `BiProject.Tests/OrderIntegrationTests.cs`
 
@@ -348,7 +348,7 @@ Vérifier l'impossibilité de modifier l'état du système (création de command
 #### 2. Complément Méthodologique
 - **Niveau** : Tests d’intégration (Backend)
 - **Type** : Non fonctionnel — Sécurité
-- **Technique** : Boîte noire — Test de contrôle d'accès
+- **Technique** : Boîte noire — test de contrôle d’accès
 - **Motivation** : Valider la protection Admin sur les ressources de catalogue produit
 - **Fichier** : `BiProject.Tests/OrderIntegrationTests.cs`
 
@@ -549,7 +549,7 @@ Vérifier l'API de récupération granulaire d'une fiche produit.
 #### 2. Complément Méthodologique
 - **Niveau** : Tests d’intégration (Backend)
 - **Type** : Non fonctionnel — Sécurité
-- **Technique** : Boîte noire — Test de privilèges
+- **Technique** : Boîte noire — test de contrôle d’accès
 - **Motivation** : Vérifier que la restriction `[Authorize(Roles = "Admin")]` est effective au niveau de l'API
 - **Fichier** : `BiProject.Tests/SecurityIntegrationTests.cs`
 
@@ -614,34 +614,37 @@ Valider que les comptes privilégiés peuvent administrer le catalogue de produi
 
 ---
 
-### CT-BUG-01 : Validation du cloisonnement des données de commande (Contrôle IDOR)
+### CT-20 : Blocage de l’accès à la commande d’un autre utilisateur (IDOR)
 
 #### 1. Identification
-- **ID Cas de test** : CT-BUG-01
-- **Titre Cas de test** : Validation du cloisonnement des données de commande (Contrôle IDOR)
+- **ID Cas de test** : CT-20
+- **Titre Cas de test** : Blocage de l’accès à la commande d’un autre utilisateur (IDOR)
 - **Créé par** : Youssef Chaari
 - **Revue par** : Mohamed Aziz Zouari
-- **Version** : 1.1
+- **Version** : 1.0
 - **Nom du testeur** : Youssef Chaari
-- **Date de test** : 2026-03-14
-- **Cas de test** : ❌ Fail (Bug IDOR confirmé par échec de validation)
+- **Date de test** : 2026-03-15
+- **Cas de test** : ❌ Fail (Validation de la faille de sécurité)
 
 #### 2. Complément Méthodologique
 - **Niveau** : Tests d’intégration (Backend)
 - **Type** : Non fonctionnel — Sécurité
-- **Technique** : Boîte noire — Test de contrôle d'accès
-- **Motivation** : Démontrer une vulnérabilité IDOR (Insecure Direct Object Reference) avant correction
+- **Technique** : Boîte noire — test de contrôle d’accès
+- **Motivation** : Vérifier que le système interdit la lecture d'une ressource appartenant à un tiers via son identifiant direct.
 - **Fichier** : `BiProject.Tests/VulnerabilityExploitTests.cs`
 
 #### 3. Prérequis
 | # | Description |
 |---|---|
-| 1 | Commande ID=10 (UserA). Token valide pour UserB. |
+| 1 | Deux comptes utilisateurs (Attaquant et Victime) |
+| 2 | Une commande appartenant à la Victime |
 
 #### 4. Jeu de données de test
 | # | Donnée | Valeur |
 |---|---|---|
-| 1 | Attaque IDOR | `GET /api/orders/10` avec Jeton UserB |
+| 1 | Compte Victime | user_victim |
+| 2 | Compte Attaquant | user_attacker |
+| 3 | OrderId | ID de la commande créée par Victime |
 
 #### 5. Scénario de test
 Vérifier que le système interdit la lecture d'une commande appartenant à un tiers via son identifiant direct (cloisonnement strict).
@@ -747,22 +750,22 @@ Valider la chaîne complète d'achat depuis la sélection jusqu'à l'enregistrem
 #### 2. Complément Méthodologique
 - **Niveau** : Tests d’intégration (Backend)
 - **Type** : Non fonctionnel — Sécurité
-- **Technique** : Boîte noire — test de contrôle d'accès
+- **Technique** : Boîte noire — test de contrôle d’accès
 - **Motivation** : Vérifier l'absence de faille IDOR (Insecure Direct Object Reference)
 - **Fichier** : `BiProject.Tests/SecurityIntegrationTests.cs`
 
 #### 3. Prérequis
 | # | Description |
 |---|---|
-| 1 | Commande ID=10 (UserA). Token valide pour UserB. |
+| 1 | Commande ID=1 (UserA). Token valide pour UserB. |
 
 #### 4. Jeu de données de test
 | # | Donnée | Valeur |
 |---|---|---|
-| 1 | Sonde Sécurité | `GET /api/orders/10` (Target tiers) |
+| 1 | Sonde Sécurité | `GET /api/orders/1` (Target tiers) |
 
 #### 5. Scénario de test
-Validation "post-corrective" de l'étanchéité des ressources utilisateur.
+Validation de l'étanchéité des ressources utilisateur.
 
 #### 6. Étapes
 | Etape # | Étapes | Résultats Attendus | Résultats Réels | Pass / Fail / Blocked |
@@ -786,7 +789,7 @@ Validation "post-corrective" de l'étanchéité des ressources utilisateur.
 #### 2. Complément Méthodologique
 - **Niveau** : Tests d’intégration (Backend)
 - **Type** : Non fonctionnel — Sécurité
-- **Technique** : Boîte noire — Test de privilèges
+- **Technique** : Boîte noire — test de contrôle d’accès
 - **Motivation** : Vérifier la protection des données stratégiques (Analytics) au niveau API
 - **Fichier** : `BiProject.Tests/SecurityIntegrationTests.cs`
 
@@ -806,4 +809,4 @@ Garantir que les statistiques métier confidentielles ne sont accessibles qu'aux
 #### 6. Étapes
 | Etape # | Étapes | Résultats Attendus | Résultats Réels | Pass / Fail / Blocked |
 |---|---|---|---|---|
-| 1 | Appel Analytics en tant qu'User | HTTP `403 Forbidden` | Réponse 403 reçue | Pass |
+| 1 | Appel Analytics en tant qu'User | HTTP `403 Forbidden` | HTTP `200 OK` (Contenu accessible sans privilèges) | Fail |

@@ -18,10 +18,10 @@ def create_presentation():
         ["Objectifs de la Mission", "- Garantir la stabilité du flux d'achat (E2E)\n- Identifier les failles critiques (Sécurité)\n- Automatiser la régression (Pyramide des tests)\n- Assurer la conformité académique"],
         ["Stratégie et Pyramide des Tests", "- Tests Unitaires : Logique d'auth (.NET)\n- Tests d'Intégration : Validation API & Contrôle d'accès\n- Tests Système : Parcours clients complets (Selenium)\n- Analyse Statique : Sécurité & Structure"],
         ["Analyse Statique & Sécurité", "- 3 Anomalies majeures détectées (IDOR, Trust Boundary, Logging)\n- Traçabilité : Matrice reliant 100% des exigences aux cas de test"],
-        ["Tests d'Intégration & Preuve de Bug", "- Le cas CT-BUG-01 : Validation dynamique de la faille IDOR\n- Résultat : Échec révélateur (Accès 200 OK non autorisé)\n- Correction & Régression : Test CT-18 validé"],
+        ["Tests d'Intégration & Preuve de Bug", "- Le cas CT-20 : Validation dynamique de la faille IDOR\n- Résultat : Échec révélateur (Accès 200 OK non autorisé)\n- Correction & Régression : Test CT-18 validé"],
         ["Automatisation Selenium (Principal)", "- Architecture POM (Page Object Model)\n- Robustesse : BasePage & Explicit Waits\n- Observabilité : Captures d'écran automatiques sur échec"],
         ["Bonus : Robot Framework (Prototype)", "- Approche Keyword-Driven : Lisibilité maximale\n- Scénarios : Login & Consultation catalogue\n- Objectif : Polyvalence technologique (Pytest vs Robot)"],
-        ["Indicateurs & Bilan Final", "- 20 Cas de tests couverts\n- 95% de taux de réussite (19/20 Pass)\n- Livrables : Catalogue, Rapports, Screenshots"],
+        ["Indicateurs & Bilan Final", "- 20 Cas de tests couverts\n- 85% de taux de réussite (17/20 Pass)\n- Livrables : Catalogue, Rapports, Screenshots"],
         ["Conclusion & Questions", "Projet Conforme, Sécurisé et Maintenable.\nMerci de votre attention !"]
     ]
 

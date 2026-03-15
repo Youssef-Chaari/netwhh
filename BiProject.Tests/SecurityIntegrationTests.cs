@@ -101,8 +101,8 @@ namespace BiProject.Tests.Integration
             _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             var response = await _client.GetAsync("/api/orders/1");
 
-            // 3. Assertion : Le système doit bloquer l'accès ou échouer sécuritairement si la faille existe (CT-BUG-01)
-            // Si CT-BUG-01 a déjà montré la faille, CT-18 documente le test d'isolation.
+            // 3. Assertion : Le système doit bloquer l'accès ou échouer sécuritairement si la faille existe (CT-20)
+            // Si CT-20 a déjà montré la faille, CT-18 documente le test d'isolation.
             Assert.True(response.StatusCode == HttpStatusCode.Forbidden || response.StatusCode == HttpStatusCode.NotFound || response.StatusCode == HttpStatusCode.Unauthorized,
                 $"Security Gap: IDOR possible on orders. Received: {response.StatusCode}");
         }

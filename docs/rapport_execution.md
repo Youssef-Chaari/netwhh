@@ -10,7 +10,7 @@
 | **Total automatisé** | — | **20** | **17** | **3** | **0** |
 
 **Statistiques globales : 20 tests exécutés (17 Pass / 3 Fail révélateurs) — 85% de succès.**
-**Les échecs (CT-BUG-01 et CT-19) confirment dynamiquement les vulnérabilités de contrôle d'accès identifiées.**
+**Les échecs (CT-20 et CT-19) confirment dynamiquement les vulnérabilités de contrôle d'accès identifiées.**
 **Les activités statiques ont été réalisées séparément et ont permis d’identifier 3 anomalies de sécurité, de conception et de structure.**
 
 ### Distinction sémantique des exécutions
@@ -31,7 +31,7 @@ Conformément aux standards ISTQB :
 | `LoginAsync_WithUnknownUser_ThrowsUnauthorizedAccessException` | ✅ Pass | ~150ms |
 
 **Commande exécutée :** `dotnet test BiProject.Tests`  
-**Résumé console synthétique :** `Test summary: total: 8, failed: 1, succeeded: 7` (L'échec de CT-BUG-01 valide le bug).
+**Résumé console synthétique :** `Test summary: total: 8, failed: 1, succeeded: 7` (L'échec de CT-20 valide le bug).
 
 ### Tests d’intégration (Backend) — `OrderIntegrationTests.cs`
 
@@ -71,8 +71,8 @@ Ce test vérifie la propriété de sécurité attendue. Son échec (HTTP 200 re�
 
 | ID | Titre | Objectif | Résultat de la validation |
 |---|---|---|---|
-| CT-BUG-01 | Validation IDOR | Vérifier le blocage d'accès (403/404) | ❌ Fail (Accès 200 OK autorisé) |
-| CT-18 | Isolation IDOR | Vérification sur ID fixe | ❌ Fail (Confirmé par CT-BUG-01) |
+| CT-20 | Validation IDOR | Vérifier le blocage d'accès (403/404) | ❌ Fail (Accès 200 OK autorisé) |
+| CT-18 | Isolation IDOR | Vérification sur ID fixe | ❌ Fail (Confirmé par CT-20) |
 | CT-19 | Sécurité Analytics | Vérifier restriction Admin sur KPIs | ❌ Fail (User accède en 200 OK) |
 
 > **Note :** Les tests Selenium ont été validés en environnement réel avec le Backend (:5120) et le Frontend (:4200) actifs.

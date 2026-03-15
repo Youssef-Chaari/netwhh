@@ -24,11 +24,11 @@ Ce tableau relie les exigences fonctionnelles et non-fonctionnelles du système 
 | REQ-SEC-02 | Identification d'anomalies (IDOR, Trust Boundary, Logging, Structure) | CT-ST-01 | Statique | Sécurité / Qualité | Revues & Inspections | Plusieurs fichiers | ✅ 3 anomalies détectées |
 | REQ-SEC-02 | Protection contre l'accès IDOR aux commandes | CT-18 | Intégration (Backend) | Sécurité | Boîte noire | `SecurityIntegrationTests.cs` | ❌ Fail |
 | REQ-SEC-03 | Restriction Admin sur Analytics BI | CT-19 | Intégration (Backend) | Sécurité | Boîte noire | `SecurityIntegrationTests.cs` | ❌ Fail |
-| — | Validation de la faille IDOR (Preuve dynamique) | CT-BUG-01 | Intégration (Backend) | Sécurité | Boîte noire | `VulnerabilityExploitTests.cs` | ❌ Fail |
+| — | Validation du contrôle d'accès | CT-20 | Intégration (Backend) | Sécurité | Boîte noire | `VulnerabilityExploitTests.cs` | ❌ Fail |
 
-### Démonstration de Vulnérabilités (Dynamic Bug Exploit)
+### Démonstration de Vulnérabilités (Dynamic Exploit Verification)
 | Exigence | Bug | CT ID | Niveau | Type | Fichier | Statut |
 |---|---|---|---|---|---|---|
-| REQ-SEC-02 | Faille IDOR sur GetOrderById | CT-BUG-01 | Intégration (Sécurité) | Validation de Bug | `VulnerabilityExploitTests.cs` | ❌ Fail (Bug IDOR) |
+| REQ-SEC-02 | Faille IDOR sur GetOrderById | CT-20 | Intégration (Sécurité) | Validation de Sécurité | `VulnerabilityExploitTests.cs` | ❌ Fail (Bug IDOR) |
 
 > Les tests Selenium (CT-01, CT-02, CT-03) ont été validés en environnement réel avec succès.
