@@ -1,126 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.4.2 (Python 3.14.2 on win32)" generated="2026-03-15T06:04:42.409096" rpa="false" schemaversion="5">
+<robot generator="Robot 7.4.2 (Python 3.14.2 on win32)" generated="2026-03-15T13:06:49.085229" rpa="false" schemaversion="5">
 <suite id="s1" name="Login Tests" source="D:\projet\BiProject\tests_robot\login_tests.robot">
 <test id="s1-t1" name="Connexion Réussie Via Robot Framework" line="13">
 <kw name="Ouvrir Le Navigateur Sur La Page De Connexion">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2026-03-15T06:04:42.623185" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:4200/login'.</msg>
+<msg time="2026-03-15T13:06:49.272268" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:4200/login'.</msg>
 <arg>${BASE_URL}/login</arg>
 <arg>${BROWSER}</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2026-03-15T06:04:42.622924" elapsed="3.186554"/>
+<status status="PASS" start="2026-03-15T13:06:49.271983" elapsed="1.285672"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2026-03-15T06:04:45.810046" elapsed="0.044685"/>
+<status status="PASS" start="2026-03-15T13:06:50.557977" elapsed="0.036629"/>
 </kw>
 <kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
 <arg>5 seconds</arg>
 <doc>Sets the implicit wait value used by Selenium.</doc>
-<status status="PASS" start="2026-03-15T06:04:45.855048" elapsed="0.003706"/>
+<status status="PASS" start="2026-03-15T13:06:50.594770" elapsed="0.000852"/>
 </kw>
-<status status="PASS" start="2026-03-15T06:04:42.622222" elapsed="3.236817"/>
+<status status="PASS" start="2026-03-15T13:06:49.271230" elapsed="1.324484"/>
 </kw>
 <kw name="Saisir Les Identifiants">
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-03-15T06:04:45.861924" level="INFO">Typing text 'test_user' into text field 'css:input[formControlName='username']'.</msg>
+<msg time="2026-03-15T13:06:50.596764" level="INFO">Typing text 'test_user' into text field 'css:input[formControlName='username']'.</msg>
 <arg>css:input[formControlName='username']</arg>
 <arg>${username}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-15T06:04:45.861264" elapsed="0.131229"/>
+<status status="PASS" start="2026-03-15T13:06:50.596440" elapsed="0.112702"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-03-15T06:04:45.994091" level="INFO">Typing text 'TestPassword123!' into text field 'css:input[formControlName='password']'.</msg>
+<msg time="2026-03-15T13:06:50.709904" level="INFO">Typing text 'TestPassword123!' into text field 'css:input[formControlName='password']'.</msg>
 <arg>css:input[formControlName='password']</arg>
 <arg>${password}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-15T06:04:45.993201" elapsed="0.184075"/>
+<status status="PASS" start="2026-03-15T13:06:50.709451" elapsed="0.103102"/>
 </kw>
 <arg>${VALID_USER}</arg>
 <arg>${VALID_PWD}</arg>
-<status status="PASS" start="2026-03-15T06:04:45.860528" elapsed="0.316895"/>
+<status status="PASS" start="2026-03-15T13:06:50.596101" elapsed="0.216714"/>
 </kw>
 <kw name="Soumettre Le Formulaire">
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2026-03-15T06:04:46.178838" level="INFO">Clicking button 'css:button[type='submit']'.</msg>
+<msg time="2026-03-15T13:06:50.814874" level="INFO">Clicking button 'css:button[type='submit']'.</msg>
 <arg>css:button[type='submit']</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-15T06:04:46.178450" elapsed="0.121737"/>
+<status status="PASS" start="2026-03-15T13:06:50.814601" elapsed="0.113229"/>
 </kw>
-<status status="PASS" start="2026-03-15T06:04:46.177806" elapsed="0.122543"/>
+<status status="PASS" start="2026-03-15T13:06:50.813771" elapsed="0.114183"/>
 </kw>
 <kw name="Vérifier La Redirection Vers Le Catalogue">
 <kw name="Wait Until Location Contains" owner="SeleniumLibrary">
 <arg>/products</arg>
 <arg>timeout=10s</arg>
 <doc>Waits until the current URL contains ``expected``.</doc>
-<status status="PASS" start="2026-03-15T06:04:46.301072" elapsed="0.211353"/>
+<status status="PASS" start="2026-03-15T13:06:50.928955" elapsed="0.209939"/>
 </kw>
 <kw name="Location Should Contain" owner="SeleniumLibrary">
-<msg time="2026-03-15T06:04:46.516408" level="INFO">Current location contains '/products'.</msg>
+<msg time="2026-03-15T13:06:51.142227" level="INFO">Current location contains '/products'.</msg>
 <arg>/products</arg>
 <doc>Verifies that the current URL contains ``expected``.</doc>
-<status status="PASS" start="2026-03-15T06:04:46.512586" elapsed="0.003919"/>
+<status status="PASS" start="2026-03-15T13:06:51.139058" elapsed="0.003259"/>
 </kw>
-<status status="PASS" start="2026-03-15T06:04:46.300661" elapsed="0.215940"/>
+<status status="PASS" start="2026-03-15T13:06:50.928414" elapsed="0.213995"/>
 </kw>
 <kw name="Fermer Le Navigateur" type="TEARDOWN">
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2026-03-15T06:04:46.517326" elapsed="2.239412"/>
+<status status="PASS" start="2026-03-15T13:06:51.143031" elapsed="2.195517"/>
 </kw>
-<status status="PASS" start="2026-03-15T06:04:46.517047" elapsed="2.239806"/>
+<status status="PASS" start="2026-03-15T13:06:51.142770" elapsed="2.195918"/>
 </kw>
 <doc>Vérifie qu'un utilisateur peut se connecter avec Robot Framework.</doc>
-<status status="PASS" start="2026-03-15T06:04:42.621474" elapsed="6.135539"/>
+<status status="PASS" start="2026-03-15T13:06:49.270476" elapsed="4.068479"/>
 </test>
 <test id="s1-t2" name="Consultation Du Catalogue Après Connexion" line="21">
 <kw name="Ouvrir Le Navigateur Sur La Page De Connexion">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2026-03-15T06:04:48.758525" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:4200/login'.</msg>
+<msg time="2026-03-15T13:06:53.340768" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:4200/login'.</msg>
 <arg>${BASE_URL}/login</arg>
 <arg>${BROWSER}</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2026-03-15T06:04:48.758307" elapsed="2.072304"/>
+<status status="PASS" start="2026-03-15T13:06:53.340561" elapsed="1.381568"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2026-03-15T06:04:50.830864" elapsed="0.044004"/>
+<status status="PASS" start="2026-03-15T13:06:54.722324" elapsed="0.025131"/>
 </kw>
 <kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
 <arg>5 seconds</arg>
 <doc>Sets the implicit wait value used by Selenium.</doc>
-<status status="PASS" start="2026-03-15T06:04:50.875089" elapsed="0.001277"/>
+<status status="PASS" start="2026-03-15T13:06:54.747609" elapsed="0.001040"/>
 </kw>
-<status status="PASS" start="2026-03-15T06:04:48.758065" elapsed="2.118425"/>
+<status status="PASS" start="2026-03-15T13:06:53.340329" elapsed="1.408524"/>
 </kw>
 <kw name="Saisir Les Identifiants">
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-03-15T06:04:50.877595" level="INFO">Typing text 'test_user' into text field 'css:input[formControlName='username']'.</msg>
+<msg time="2026-03-15T13:06:54.749966" level="INFO">Typing text 'test_user' into text field 'css:input[formControlName='username']'.</msg>
 <arg>css:input[formControlName='username']</arg>
 <arg>${username}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-15T06:04:50.877316" elapsed="0.143704"/>
+<status status="PASS" start="2026-03-15T13:06:54.749770" elapsed="0.125749"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-03-15T06:04:51.021649" level="INFO">Typing text 'TestPassword123!' into text field 'css:input[formControlName='password']'.</msg>
+<msg time="2026-03-15T13:06:54.876005" level="INFO">Typing text 'TestPassword123!' into text field 'css:input[formControlName='password']'.</msg>
 <arg>css:input[formControlName='password']</arg>
 <arg>${password}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-15T06:04:51.021263" elapsed="0.124988"/>
+<status status="PASS" start="2026-03-15T13:06:54.875719" elapsed="0.108536"/>
 </kw>
 <arg>${VALID_USER}</arg>
 <arg>${VALID_PWD}</arg>
-<status status="PASS" start="2026-03-15T06:04:50.876904" elapsed="0.269608"/>
+<status status="PASS" start="2026-03-15T13:06:54.749458" elapsed="0.234966"/>
 </kw>
 <kw name="Soumettre Le Formulaire">
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2026-03-15T06:04:51.147544" level="INFO">Clicking button 'css:button[type='submit']'.</msg>
+<msg time="2026-03-15T13:06:54.985493" level="INFO">Clicking button 'css:button[type='submit']'.</msg>
 <arg>css:button[type='submit']</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-15T06:04:51.147303" elapsed="0.083392"/>
+<status status="PASS" start="2026-03-15T13:06:54.985303" elapsed="0.095933"/>
 </kw>
-<status status="PASS" start="2026-03-15T06:04:51.146938" elapsed="0.083912"/>
+<status status="PASS" start="2026-03-15T13:06:54.984933" elapsed="0.096471"/>
 </kw>
 <kw name="Vérifier La Présence Des Produits Dans La Grille">
 <kw name="Vérifier La Redirection Vers Le Catalogue">
@@ -128,43 +128,43 @@
 <arg>/products</arg>
 <arg>timeout=10s</arg>
 <doc>Waits until the current URL contains ``expected``.</doc>
-<status status="PASS" start="2026-03-15T06:04:51.232030" elapsed="0.209041"/>
+<status status="PASS" start="2026-03-15T13:06:55.082541" elapsed="0.212073"/>
 </kw>
 <kw name="Location Should Contain" owner="SeleniumLibrary">
-<msg time="2026-03-15T06:04:51.444595" level="INFO">Current location contains '/products'.</msg>
+<msg time="2026-03-15T13:06:55.297482" level="INFO">Current location contains '/products'.</msg>
 <arg>/products</arg>
 <doc>Verifies that the current URL contains ``expected``.</doc>
-<status status="PASS" start="2026-03-15T06:04:51.441242" elapsed="0.003437"/>
+<status status="PASS" start="2026-03-15T13:06:55.294765" elapsed="0.002791"/>
 </kw>
-<status status="PASS" start="2026-03-15T06:04:51.231699" elapsed="0.213066"/>
+<status status="PASS" start="2026-03-15T13:06:55.082168" elapsed="0.215469"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>css:.grid &gt; div.glass-panel</arg>
 <arg>timeout=10s</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-03-15T06:04:51.444881" elapsed="0.015345"/>
+<status status="PASS" start="2026-03-15T13:06:55.297749" elapsed="0.020060"/>
 </kw>
 <kw name="Page Should Contain Element" owner="SeleniumLibrary">
-<msg time="2026-03-15T06:04:51.468383" level="INFO">Current page contains element 'css:.grid &gt; div.glass-panel'.</msg>
+<msg time="2026-03-15T13:06:55.324301" level="INFO">Current page contains element 'css:.grid &gt; div.glass-panel'.</msg>
 <arg>css:.grid &gt; div.glass-panel</arg>
 <doc>Verifies that element ``locator`` is found on the current page.</doc>
-<status status="PASS" start="2026-03-15T06:04:51.460398" elapsed="0.008271"/>
+<status status="PASS" start="2026-03-15T13:06:55.318122" elapsed="0.006292"/>
 </kw>
-<status status="PASS" start="2026-03-15T06:04:51.231265" elapsed="0.237697"/>
+<status status="PASS" start="2026-03-15T13:06:55.081769" elapsed="0.242735"/>
 </kw>
 <kw name="Fermer Le Navigateur" type="TEARDOWN">
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2026-03-15T06:04:51.469901" elapsed="2.203605"/>
+<status status="PASS" start="2026-03-15T13:06:55.325204" elapsed="2.165752"/>
 </kw>
-<status status="PASS" start="2026-03-15T06:04:51.469629" elapsed="2.204006"/>
+<status status="PASS" start="2026-03-15T13:06:55.324918" elapsed="2.166144"/>
 </kw>
 <doc>Vérifie que le catalogue est visible après authentification.</doc>
-<status status="PASS" start="2026-03-15T06:04:48.757529" elapsed="4.916317"/>
+<status status="PASS" start="2026-03-15T13:06:53.339826" elapsed="4.151476"/>
 </test>
 <doc>Scénario de test Bonus avec Robot Framework.
 Ce test démontre l'utilisation de keywords lisibles pour l'authentification.</doc>
-<status status="PASS" start="2026-03-15T06:04:42.410995" elapsed="11.263771"/>
+<status status="PASS" start="2026-03-15T13:06:49.086698" elapsed="8.405526"/>
 </suite>
 <statistics>
 <total>
