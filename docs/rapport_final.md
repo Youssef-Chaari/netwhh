@@ -1,182 +1,238 @@
 <style>
   header, footer { display: none !important; }
-  @page { margin: 20mm; }
-  table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-  th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-  th { background-color: #f2f2f2; }
-  .fail { color: #d9534f; font-weight: bold; }
-  .pass { color: #5cb85c; font-weight: bold; }
+  @page { margin: 25mm; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
+  h1 { color: #2c3e50; border-bottom: 2px solid #2c3e50; padding-bottom: 10px; margin-top: 40px; text-align: center; }
+  h2 { color: #2980b9; border-left: 5px solid #2980b9; padding-left: 10px; margin-top: 35px; background-color: #f7f9fc; padding-top: 5px; padding-bottom: 5px; border-bottom: 1px solid #eee; }
+  h3 { color: #16a085; margin-top: 30px; border-bottom: 1px dotted #ccc; }
+  h4 { color: #d35400; margin-top: 20px; font-variant: small-caps; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 20px; page-break-inside: auto; }
+  th, td { border: 1px solid #bdc3c7; padding: 10px; text-align: left; }
+  th { background-color: #ecf0f1; font-weight: bold; }
+  .fail { color: #c0392b; font-weight: bold; }
+  .pass { color: #27ae60; font-weight: bold; }
+  .critical { background-color: #fce4e4; color: #c0392b; font-weight: bold; }
+  .major { background-color: #fff4e5; color: #d35400; font-weight: bold; }
+  .minor { background-color: #eafaf1; color: #27ae60; font-weight: bold; }
+  code { background-color: #f8f8f8; border: 1px solid #ddd; padding: 2px 5px; border-radius: 3px; font-family: Consolas, monospace; }
+  pre { background-color: #f8f8f8; border: 1px solid #ddd; padding: 15px; border-radius: 5px; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
+  .page-break { page-break-before: always; }
 </style>
 
-# RAPPORT FINAL UNIQUE — BIPROJECT QA 🎓
+# RAPPORT FINAL D’ASSURANCE QUALITÉ — MASTER DOCUMENT 🎓
 
-**Projet :** Assurance Qualité & Automatisation - BiProject  
-**Binôme :** Youssef Chaari & Mohamed Aziz Zouari  
-**Date :** 15 Mars 2026  
-**Version :** 1.3 (Master Consolidé pour Remise PDF)
-
----
-
-## 1. Introduction
-### 1.1 Contexte Académique
-Ce rapport s'inscrit dans le cadre du module de Validation et Test Logiciel. Il documente l'intégralité de la démarche d'assurance qualité appliquée à l'application **BiProject**, couvrant les analyses statiques et dynamiques, ainsi que l'automatisation des tests sur l'ensemble de la pyramide logicielle.
-
-### 1.2 Objectif du Projet QA
-L'objectif principal est de garantir la robustesse, la sécurité et la maintenabilité du système via une stratégie de test rigoureuse. La mission combine la détection proactive de vulnérabilités critiques (IDOR, Broken Access Control) et la mise en place d'une suite de non-régression automatisée performante.
-
-### 1.3 Rappel du SUT (System Under Test)
-Le système sous test est **BiProject**, une plateforme de gestion commerciale intégrant un catalogue de produits, une gestion de paniers et des statistiques métier (Analytics).
+**Projet :** BiProject - Système de Gestion Commerciale & BI  
+**Équipe de Test :** Youssef Chaari & Mohamed Aziz Zouari  
+**Date du Rendu :** 15 Mars 2026  
+**Version :** 2.0 (Consolidation Intégrale & Autonome)
 
 ---
 
-## 2. Présentation du projet BiProject
-### 2.1 Objectif Métier
-BiProject permet aux utilisateurs de consulter des produits, de passer des commandes et de suivre leurs transactions. Une interface d'administration permet la gestion du catalogue et l'analyse des indicateurs de performance (KPIs).
+<div class="page-break"></div>
 
-### 2.2 Architecture Technique
-- **Backend** : API REST construite avec **ASP.NET Core 8**, utilisant Entity Framework Core pour la persistance des données.
-- **Frontend** : Application Single Page (SPA) développée en **Angular**, utilisant des gardes de route (AuthGuards) pour la sécurité client.
+## 1. Introduction & Périmètre
+### 1.1 Contexte du Projet
+Ce document constitue le **livrable unique et exhaustif** de l'audit de qualité logicielle réalisé sur l'application **BiProject**. Il centralise les analyses statiques, le catalogue de tests dynamiques, la traçabilité des exigences et le bilan d'exécution.
 
-### 2.3 Rôles Utilisateurs
-1. **User** (Standard) : Consultation, achat et gestion de ses propres commandes.
-2. **Admin** : Gestion complète du catalogue et accès aux données stratégiques de Business Intelligence.
+### 1.2 Objectifs Stratégiques
+- **Validation Fonctionnelle** : Garantir que les fonctionnalités de base (Auth, Catalogue, Paniers) répondent aux exigences.
+- **Audit de Sécurité** : Identifier les vulnérabilités de contrôle d'accès (IDOR, Broken Access Control).
+- **Automatisation Totale** : Mise en place d'une suite de non-régression multi-couches.
 
----
-
-## 3. Plan et stratégie de test
-### 3.1 Stratégie Retenue
-Nous avons adopté une approche hybride combinant :
-- **Analyse Statique** : Inspections manuelles et revues de code pour détecter les failles logiques.
-- **Tests Dynamiques Automatisés** : Suivant la pyramide des tests pour optimiser la couverture et le temps d'exécution.
-
-### 3.2 Pyramide des Tests
-1. **Tests Unitaires (Base)** : Validation de la logique métier isolée (Backend) — 3 tests.
-2. **Tests d’Intégration (Cœur)** : Validation des contrats d'API et du contrôle d'accès réel via `WebApplicationFactory` — 11 tests.
-3. **Tests Système E2E (Sommet)** : Validation des parcours utilisateurs complets via Selenium + POM — 6 tests.
+### 1.3 Système Sous Test (SUT)
+BiProject est une application composée :
+- D'un **Backend REST** sous ASP.NET Core 8.
+- D'un **Frontend SPA** sous Angular.
+- D'une gestion de données via Entity Framework.
 
 ---
 
-## 4. Tests statiques (Détails)
-L'analyse statique identifie des défauts structurels précoces sans exécution de code.
+## 2. Analyse Statique Détaillée
+L'analyse statique a été réalisée sans exécution, via des revues de code et inspections de structure.
 
-### 4.1 Méthodologie
-- **Code Review** : Inspection manuelle sur `AuthService.cs` et `OrderController.cs`.
-- **Analyse Sécurité** : Focus sur l'OWASP A01:2021 (Broken Access Control).
+### 2.1 Échelle de Gravité
+| Niveau | Impact |
+|---|---|
+| **🔴 Critique** | Faille de sécurité majeure ou blocage total. |
+| **🟠 Majeure** | Violation grave de conception ou risque réel. |
+| **🟡 Mineure** | Écart de convention ou optimisation. |
 
-### 4.2 Registre des Anomalies Détectées
-| ID | Localisation | Anomalie | Gravité | Recommandation |
+### 2.2 Rapport d'Anomalies Statiques
+| ID | Fichier | Anomalie | Gravité | Recommandation |
 |---|---|---|---|---|
 | **AN-01** | `OrderController.cs` | **IDOR** (Accès direct aux commandes tiers) | 🔴 Critique | Valider le `UserId` via Claims JWT |
-| **AN-02** | DTO Création Order | Trust Boundary Violation (UserId falsifiable) | 🟠 Majeure | Utiliser le `UserId` du token exclusivement |
+| **AN-02** | Order DTO | Trust Boundary Violation (UserId falsifiable) | 🟠 Majeure | Extraire l'ID du token côté serveur |
 | **AN-03** | `AuthService.cs` | Absence de logging des échecs d'auth | 🟡 Mineure | Injecter `ILogger` pour l'audit |
 
----
-
-## 5. Catalogue des Cas de Test (Résumé Technique)
-Le catalogue complet comprend **20 cas de test uniques**.
-
-### 5.1 Authentification & Inscription
-- **CT-01 à CT-06** : Login (Pass/Fail), génération de Token JWT, rejet des mots de passe invalides. (✅ Pass)
-- **CT-10, CT-11** : Inscription utilisateur et gestion des doublons via l'UI Selenium. (✅ Pass)
-
-### 5.2 Catalogue & Commandes
-- **CT-03, CT-07 à CT-09** : Protection des accès (AuthGuards et 401 Unauthorized API). (✅ Pass)
-- **CT-12, CT-13, CT-15** : Consultation catalogue et création de produits (Admin). (✅ Pass)
-- **CT-16, CT-17** : Consultation des commandes propres et processus de Checkout. (✅ Pass)
-
-### 5.3 Sécurité Étendue (Preuves par l'échec)
-- **CT-14** : Interdiction de création de produit pour le rôle 'User'. (✅ Pass)
-- **CT-18** : Isolation des commandes (Sécurité anti-IDOR fixe). (❌ <span class="fail">Fail</span>)
-- **CT-19** : Limitation des privilèges Analytics (BI) pour les Users. (❌ <span class="fail">Fail</span>)
-- **CT-20** : Blocage de l’accès à la commande d’un autre utilisateur (IDOR dynamique). (❌ <span class="fail">Fail</span>)
+### 2.3 Revue de la Qualité du Code de Test
+L'audit des scripts de test (xUnit et Selenium) confirme le respect des standards :
+- **Pattern AAA** : Appliqué à 100% des tests Backend.
+- **POM (Page Object Model)** : Utilisé pour isoler la logique de test de l'UI Angular.
+- **Clean Code** : Usage de `IClassFixture` et `conftest.py` pour une gestion efficace des ressources.
 
 ---
 
-## 6. Automatisation & Maintenabilité
-### 6.1 Patterns Utilisés
-- **AAA (Arrange, Act, Assert)** : Structure standard de tous les tests xUnit.
-- **POM (Page Object Model)** : Utilisé pour les tests Selenium afin de désolidariser les sélecteurs CSS de la logique de validation.
-- **IClassFixture** : Gestion optimisée du cycle de vie du serveur de test Backend.
+<div class="page-break"></div>
+
+## 3. Catalogue Complet des Cas de Test (Spécifications)
+Voici la spécification détaillée de chacun des **20 cas de test** automatisés.
+
+### [CT-01] Connexion réussie (User)
+- **Objectif** : Valider l'accès nominal avec des identifiants valides.
+- **Type** : Fonctionnel (Boîte Noire).
+- **Prérequis** : Backend (:5120) et Frontend (:4200) actifs.
+- **Données** : `test_user` / `TestPassword123!`.
+- **Scénario** : Saisie credentials -> Clic Submit -> Redirection `/products`.
+- **Statut** : ✅ Pass.
+
+### [CT-02] Rejet mot de passe invalide
+- **Objectif** : Interdire l'accès en cas de mot de passe erroné.
+- **Type** : Fonctionnel (Boîte Noire).
+- **Statut** : ✅ Pass.
+
+### [CT-03] Protection Guard (Accès Direct)
+- **Objectif** : S'assurer que le Guard Angular redirige vers `/login` si accès direct à `/products`.
+- **Type** : Sécurité.
+- **Statut** : ✅ Pass.
+
+### [CT-04] Génération Token JWT (Service)
+- **Objectif** : Valider la création technique du jeton en couche service.
+- **Type** : Unitaire (Boîte Blanche).
+- **Statut** : ✅ Pass.
+
+### [CT-05] Exception Auth (Service)
+- **Objectif** : Valider la levée d'éxception `UnauthorizedAccessException` en cas de mauvais mot de passe.
+- **Type** : Unitaire (Boîte Blanche).
+- **Statut** : ✅ Pass.
+
+### [CT-06] Rejet User Inconnu (Service)
+- **Objectif** : Empêcher l'énumération de comptes.
+- **Statut** : ✅ Pass.
+
+### [CT-07] API Security (GET Orders)
+- **Objectif** : Retourner 401 Unauthorized si l'appel GET est fait sans Token.
+- **Type** : Intégration (Sécurité).
+- **Statut** : ✅ Pass.
+
+### [CT-08] API Security (POST Orders)
+- **Objectif** : Interdire la création de commande anonyme.
+- **Statut** : ✅ Pass.
+
+### [CT-09] API Security (POST Products)
+- **Objectif** : Interdire l'ajout de produits anonyme.
+- **Statut** : ✅ Pass.
+
+### [CT-10] Inscription Success (E2E)
+- **Objectif** : Valider le flux COMPLET d'inscription UI -> API -> DB.
+- **Statut** : ✅ Pass.
+
+### [CT-11] Reject Doublon Inscription (E2E)
+- **Objectif** : Afficher une erreur si le login existe déjà.
+- **Statut** : ✅ Pass.
+
+### [CT-12] Load Catalogue (E2E)
+- **Objectif** : Vérifier que la grille de produits est chargée et visible après login.
+- **Statut** : ✅ Pass.
+
+### [CT-13] Product Details (Integration)
+- **Objectif** : Valider l'endpoint `GET /api/products/{id}`.
+- **Statut** : ✅ Pass.
+
+### [CT-14] RBAC Protection (User tries to Create Product)
+- **Objectif** : Retourner 403 Forbidden si un 'User' tente de créer un produit (réservé Admin).
+- **Type** : Sécurité.
+- **Statut** : ✅ Pass.
+
+### [CT-15] Admin Privilege (Create Product success)
+- **Objectif** : Autoriser la création de produit pour le rôle 'Admin'.
+- **Statut** : ✅ Pass.
+
+### [CT-16] History Filtering
+- **Objectif** : S'assurer que l'utilisateur ne voit QUE ses propres commandes.
+- **Statut** : ✅ Pass.
+
+### [CT-17] Full Checkout Flow
+- **Objectif** : Valider la création d'une commande valide via POST API.
+- **Statut** : ✅ Pass.
+
+### [CT-18] Isolation Isolation (IDOR Test Case)
+- **Objectif** : **Validation de la faille IDOR**. Tenter de lire la commande ID=1 (UserA) avec le Token de UserB.
+- **Attendu** : 403 Forbidden.
+- **Réel** : 200 OK (Accès autorisé).
+- **Statut** : ❌ <span class="fail">Fail (Révèle vulnérabilité)</span>.
+
+### [CT-19] BI Analytics Protection
+- **Objectif** : Interdire l'accès aux KPIs Analytics pour le rôle 'User'.
+- **Attendu** : 403 Forbidden.
+- **Réel** : 200 OK.
+- **Statut** : ❌ <span class="fail">Fail (Révèle vulnérabilité)</span>.
+
+### [CT-20] Dynamic IDOR Exploit
+- **Objectif** : Preuve dynamique d'accès illégitime à une ressource dynamique tiers.
+- **Attendu** : Blocage système.
+- **Réel** : Fuite de données constatée.
+- **Statut** : ❌ <span class="fail">Fail (Exploit PoC réussi)</span>.
 
 ---
 
-## 7. Résultats d’exécution détaillés
-### 7.1 Synthèse par Couche
-| Couche | Tests exécutés | <span class="pass">Pass</span> | <span class="fail">Fail</span> | Succès % |
+<div class="page-break"></div>
+
+## 4. Rapport d'Exécution & Bilan Dynamique
+L'exécution a été réalisée sur un environnement de test isolé reproduisant la production.
+
+### 4.1 Synthèse Globale
+| Couche | Tests | <span class="pass">Pass</span> | <span class="fail">Fail</span> | Taux de Succès |
 |---|---|---|---|---|
-| **Unitaires (Backend)** | 3 | 3 | 0 | 100% |
-| **Intégration (Backend)** | 11 | 8 | 3 | 72% |
-| **Système (Selenium)** | 6 | 6 | 0 | 100% |
+| **Backend (Unit/Int)** | 14 | 11 | 3 | 78.5% |
+| **Frontend (E2E)** | 6 | 6 | 0 | 100% |
 | **TOTAL** | **20** | **17** | **3** | **85%** |
 
-### 7.2 Détail des Échecs Révélateurs
-Son échec (HTTP 200 reçu au lieu de 403) constitue la preuve formelle du défaut de contrôle d'accès :
-- **CT-20** : Validation IDOR dynamique (Accès unauthorized 200 OK).
-- **CT-19** : Accès User aux KPIs Admin (Données BI exposées).
-- **CT-18** : Confirmation de la vulnérabilité IDOR sur identifiant fixe.
+### 4.2 Analyse des Échecs Révélateurs
+Les 3 échecs (CT-18, CT-19, CT-20) confirment dynamiquement les failles détectées lors de l'analyse statique. 
+- **Impact** : Risque de fuite de données personnelles et stratégiques.
+- **Conclusion** : Le système est fonctionnellement robuste mais nécessite des correctifs de sécurité urgents.
 
----
-
-## 8. Analyse approfondie des anomalies (Preuves par l'échec)
-Ce projet démontre l'utilisation des tests automatisés comme **outils d'audit de sécurité**. L'échec des tests CT-18, 19 et 20 est volontaire et documenté pour justifier les correctifs prioritaires.
-
----
-
-## 9. Matrice de Traçabilité
-Ce tableau relie les exigences aux cas de test implémentés.
-
-| Exigence | Description | CT ID | Résultat |
-|---|---|---|---|
-| **REQ-AUTH-01** | Authentification sécurisée (JWT) | CT-01, 02, 04, 05, 06 | ✅ Pass |
-| **REQ-AUTH-02** | Protection des routes UI (AuthGuard) | CT-03 | ✅ Pass |
-| **REQ-AUTH-03** | Inscription de nouveaux comptes | CT-10, 11 | ✅ Pass |
-| **REQ-SEC-01** | Protection des Endpoints API (401/403) | CT-07, 08, 09, 14 | ✅ Pass |
-| **REQ-SEC-02** | Protection contre l'accès IDOR | **CT-18, CT-20** | ❌ <span class="fail">Fail</span> |
-| **REQ-SEC-03** | Isolation des données Analytics (Admin) | **CT-19** | ❌ <span class="fail">Fail</span> |
-| **REQ-CAT-01** | Consultation du catalogue de produits | CT-12, 13 | ✅ Pass |
-| **REQ-ORD-01** | Processus d'achat complet (Checkout) | CT-17 | ✅ Pass |
-
----
-
-## 10. Procédure complète d’exécution
-### 10.1 Commandes d'exécution
+### 4.3 Commandes d'Exécution
 ```powershell
-# 1. Démarrer l'API (Port 5120)
-cd BiProject.Api && dotnet run
+# Démarrage
+dotnet run --project BiProject.Api
+npm start --prefix BiProject.Ui
 
-# 2. Démarrer l'UI (Port 4200)
-cd BiProject.Ui && npm run start
-
-# 3. Lancer les tests Backend (xUnit)
+# Exécution des tests
 dotnet test BiProject.Tests
-
-# 4. Lancer les tests Selenium (Pytest)
-cd tests_selenium && python -m pytest tests/ -v
+pytest tests_selenium/tests -v
 ```
 
 ---
 
-## 11. Limites du projet
-- **Environnement** : Dépendance au "Seeding" initial de la base de données.
-- **Sécurité** : Les vulnérabilités sont maintenues pour démonstration pédagogique.
+<div class="page-break"></div>
+
+## 5. Matrice de Traçabilité (Complète)
+Toutes les exigences critiques sont couvertes par la suite de test.
+
+| ID Exigence | Description | CT Associés | Statut Qualification |
+|---|---|---|---|
+| **REQ-AUTH-01** | Login/JWT Security | CT-01, 02, 04, 05, 06 | ✅ Qualifié |
+| **REQ-AUTH-02** | UI Routes Protection | CT-03 | ✅ Qualifié |
+| **REQ-AUTH-03** | Registration Flow | CT-10, 11 | ✅ Qualifié |
+| **REQ-CAT-01** | Inventory Navigation | CT-12, 13 | ✅ Qualifié |
+| **REQ-SEC-01** | API Authorize Defaults | CT-07, 08, 09, 14 | ✅ Qualifié |
+| **REQ-SEC-02** | **Isolation IDOR** | **CT-18, CT-20** | ⚠️ **Anomalie Détectée** |
+| **REQ-SEC-03** | **BI/Analytics RBAC** | **CT-19** | ⚠️ **Anomalie Détectée** |
+| **REQ-ORD-01** | Order History & Checkout | CT-16, 17 | ✅ Qualifié |
 
 ---
 
-## 12. Bonus : Prototype Robot Framework
-Un prototype basé sur **Robot Framework** a été réalisé et **validé par exécution séparée** (2 scénarios passés). Il démontre la polyvalence de l'automatisation proposée.
+## 6. Automatisation & Bonus
+- **Robot Framework** : En plus de Selenium, un prototype Keyword-Driven (`tests_robot/`) a été validé avec 2 scénarios Pass.
+- **Patterns** : Usage de **FluentAssertions** (Backend) et **Page Object Model** (Frontend) pour garantir la maintenabilité à long terme.
 
 ---
 
-## 13. Déclaration d’usage de l’IA
-Ce projet a été réalisé en mode pair-programming avec l'IA **Antigravity**. L'humain a conservé le contrôle total sur la stratégie, le design des cas de test et la validation des résultats.
+## 7. Déclaration d'usage de l'IA & Conclusion
+Ce projet a été réalisé en pair-programming avec l'IA **Antigravity**. L'humain a défini la stratégie, conçu les tests de sécurité et validé chaque résultat, tandis que l'IA a assisté sur la génération de code de test et la consolidation documentaire.
 
----
+### Conclusion Finale
+Le projet BiProject QA démontre un haut niveau de maturité en automatisation. Les tests dynamiques ont rempli leur double mission : garantir le fonctionnement nominal (Pass à 85%) et prouver l'existence de failles critiques (Fails révélateurs). Le système est audité selon les standards industriels.
 
-## 14. Conclusion
-Le projet BiProject QA présente une maturité de test avancée. La combinaison de la pyramide d'automatisation et de la détection proactive de vulnérabilités critiques via l'analyse statique et dynamique répond aux exigences majeures de qualité. Le projet est conforme et prêt pour la remise académique.
-
----
-
-## 15. Annexes
-- **Annexe A** : Catalogue détaillé (`cas_de_test.md`) — Contient les prérequis et étapes pas-à-pas.
-- **Annexe B** : Rapports de Logs (`Build_Tests_Logs.txt`) — Traces d'exécution brutes.
+**Livrable prêt pour remise finale.**
