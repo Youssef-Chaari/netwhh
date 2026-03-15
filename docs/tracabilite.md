@@ -3,7 +3,7 @@
 **Projet :** BiProject  
 **Auteurs :** Youssef Chaari & Mohamed Aziz Zouari  
 **Date :** 15 Mars 2026  
-**Version :** 1.2 (Harmonisée)  
+**Version :** 1.2  
 
 ---
 

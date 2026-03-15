@@ -3,7 +3,7 @@
 **Projet :** BiProject (Architecture .NET & Angular)  
 **Auteurs :** Youssef Chaari & Mohamed Aziz Zouari  
 **Date :** 15 Mars 2026  
-**Version :** 4.1 (Consolidation Harmonisée)  
+**Version :** 4.1  
 
 ---
 
@@ -29,7 +29,7 @@ Le présent audit est strictement aligné sur les exigences académiques du cahi
 | **Tests Non-Fonctionnels** | Focus majeur sur la sécurité (Contrôle d'accès et vulnérabilités IDOR). |
 | **Niveaux de Test**        | Couverture des trois niveaux : Unitaire, Intégration et Système (E2E).  |
 | **Techniques de Test**     | Alternance entre techniques de Boîte Blanche et de Boîte Noire.         |
-| **Automatisation**         | Suites automatisées pérennes (xUnit, Selenium avec POM).                |
+| **Automatisation**         | Suites automatisées pérennes (xUnit, Selenium avec POM, Robot Framework). |
 | **Traçabilité**            | Mapping exhaustif Exigences -> Tests -> Résultats.                      |
 
 ---
@@ -40,7 +40,7 @@ Le présent audit est strictement aligné sur les exigences académiques du cahi
 Notre campagne s'est articulée autour de trois paliers fondamentaux :
 1.  **Tests Unitaires (Backend)** : Validation de la logique métier isolée via xUnit et bases In-Memory.
 2.  **Tests d'Intégration (Backend)** : Vérification des contrats API et de la persistance réelle via `WebApplicationFactory`.
-3.  **Tests Système (E2E)** : Simulation des flux utilisateurs complets via Selenium WebDriver et pattern POM.
+3.  **Tests Système (E2E)** : Simulation des flux utilisateurs complets via Selenium WebDriver (pattern POM) et Robot Framework pour la validation croisée des scénarios critiques.
 
 ### 3.2 Justification du Test Non-Fonctionnel
 Nous avons choisi la **Sécurité informatique** (Access Control) comme axe majeur. Dans une application BI, l'intégrité des rapports de vente est critique. Une faille de type IDOR (*Insecure Direct Object Reference*) compromettrait la confidentialité stratégique des clients.
@@ -83,19 +83,22 @@ Nous avons choisi la **Sécurité informatique** (Access Control) comme axe maje
 | **CT-18** | Isolation IDOR (Ordre fixe)     | Intégra. | Sécu. | B. Noire   | `SecurityIntegration` | ❌ Fail |
 | **CT-19** | Accès RBAC Analytics            | Intégra. | Sécu. | B. Noire   | `SecurityIntegration` | ❌ Fail |
 | **CT-20** | Vérification vulnérabilité IDOR | Intégra. | Sécu. | B. Noire   | `VulnerabilityTests`  | ❌ Fail |
+| **CT-21** | Connexion réussie (Robot)       | Système  | Fonc. | B. Noire   | Robot Framework       | ✅ Pass |
+| **CT-22** | Consultation catalogue (Robot)  | Système  | Fonc. | B. Noire   | Robot Framework       | ✅ Pass |
 
 ---
 
 ## 6. Rapport d'Exécution et Bilan Dynamique
 
 ### 6.1 Synthèse de l'Exécution
-- **Total des tests exécutés** : 20
-- **Pass** : 17 (85%)
-- **Fail** : 3 (15%) — *Échecs révélateurs de vulnérabilités.*
+- **Total des tests exécutés** : 22
+- **Pass** : 19 (86.4%)
+- **Fail** : 3 (13.6%) — *Échecs révélateurs de vulnérabilités.*
 
 ### 6.2 Résultats par Couche Logicielle
 - **Tests Unitaires / Intégration (C#)** : 14 tests, 11 ✅ Pass / 3 ❌ Fail.
 - **Tests Système (Selenium/POM)** : 6 tests, 6 ✅ Pass (100%).
+- **Tests Système (Robot Framework)** : 2 tests, 2 ✅ Pass (100%).
 
 ---
 
@@ -132,7 +135,7 @@ Conformément aux bonnes pratiques académiques en vigueur, nous déclarons avoi
 **Usages effectifs :**
 - Génération de la structure initiale des squelettes de tests (boilerplate xUnit, Selenium).
 - Aide à la reformulation et à la mise en forme de certains passages documentaires.
-- Assistance au débogage de configurations techniques (setup du `WebApplicationFactory`, `conftest.py`).
+- Assistance au débogage de configurations techniques (setup du `WebApplicationFactory`, `conftest.py`, Robot Framework).
 
 **Ce qui a été réalisé par les auteurs :**
 L'ensemble de la **stratégie de test**, la **définition des cas de test**, l'**analyse des résultats**, l'**interprétation des anomalies** (notamment la vulnérabilité IDOR) et les **décisions de correction** ont été conduits exclusivement par Youssef Chaari et Mohamed Aziz Zouari. Chaque résultat a fait l'objet d'une vérification manuelle.
@@ -141,6 +144,6 @@ L'ensemble de la **stratégie de test**, la **définition des cas de test**, l'*
 
 ## 10. Conclusion Finale et Recommandations
 
-L'application **BiProject** présente une maturité fonctionnelle élevée sur ses parcours nominaux (85% de succès). Cependant, la présence de failles critiques de type **IDOR** identifiées par l'audit nécessite des correctifs immédiats. La mise en œuvre d'une pipeline CI/CD automatisant ces tests est recommandée pour pérenniser la qualité du système.
+L'application **BiProject** présente une maturité fonctionnelle élevée sur ses parcours nominaux (86% de succès). Cependant, la présence de failles critiques de type **IDOR** identifiées par l'audit nécessite des correctifs immédiats. La mise en œuvre d'une pipeline CI/CD automatisant l'ensemble des suites (xUnit, Selenium, Robot) est recommandée pour pérenniser la qualité du système.
 
 ---

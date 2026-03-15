@@ -3,7 +3,7 @@
 **Projet :** BiProject  
 **Auteurs :** Youssef Chaari & Mohamed Aziz Zouari  
 **Date :** 15 Mars 2026  
-**Version :** 1.2 (Harmonisée)  
+**Version :** 1.2  
 
 ---
 
@@ -13,10 +13,10 @@ L'exécution de la suite de tests automatisée a permis de valider la stabilité
 
 | Indicateur | Valeur |
 | :--- | :--- |
-| **Total des tests exécutés** | 20 |
-| **Tests réussis (Pass)** | 17 |
+| **Total des tests exécutés** | 22 |
+| **Tests réussis (Pass)** | 19 |
 | **Tests échoués (Fail)** | 3 |
-| **Taux de succès global** | **85%** |
+| **Taux de succès global** | **86.4%** |
 
 ---
 
@@ -34,11 +34,17 @@ Vérification des endpoints API et de la sécurité serveur.
 - **Statut** : 8 ✅ Pass / 3 ❌ Fail
 - **Outil** : xUnit (`OrderIntegrationTests.cs`, `SecurityIntegrationTests.cs`)
 
-### 2.3 Tests Système (E2E)
+### 2.3 Tests Système (Selenium)
 Simulation de parcours utilisateurs complets dans le navigateur.
 - **Total** : 6 tests
 - **Statut** : 6 ✅ Pass (100%)
 - **Outil** : Selenium + POM
+
+### 2.4 Tests Système (Robot Framework)
+Validation croisée des scénarios critiques.
+- **Total** : 2 tests
+- **Statut** : 2 ✅ Pass (100%)
+- **Outil** : Robot Framework
 
 ---
 
@@ -62,7 +68,8 @@ dotnet test BiProject.Tests
 ### Système (UI)
 ```powershell
 # Prérequis : Backend et Frontend actifs
-pytest tests_selenium/tests -v
+py -m pytest tests_selenium/tests -v
+py -m robot --outputdir tests_robot/results tests_robot/login_tests.robot
 ```
 
 ---

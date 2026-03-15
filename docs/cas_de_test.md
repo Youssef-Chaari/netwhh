@@ -3,7 +3,7 @@
 **Projet :** BiProject (Architecture .NET & Angular)  
 **Auteurs :** Youssef Chaari & Mohamed Aziz Zouari  
 **Date :** 15 Mars 2026  
-**Version :** 3.0 (Fiches Académiques d'Audit)  
+**Version :** 3.0  
 
 ---
 
