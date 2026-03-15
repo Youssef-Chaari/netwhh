@@ -2,24 +2,19 @@ import os
 import pytest
 from datetime import datetime
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
 
 @pytest.fixture(scope="function")
 def driver():
-    """Fixture Selenium : instancie Chrome et retourne le WebDriver."""
     options = Options()
-    # options.add_argument("--headless") # Décommenter pour le mode headless
+    # options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--window-size=1280,800")
 
-    drv = webdriver.Chrome(
-        service=Service(ChromeDriverManager().install()),
-        options=options
-    )
-    drv.implicitly_wait(2) # Réduit car on va utiliser des explicit waits
+    drv = webdriver.Chrome(options=options)
+
+    drv.implicitly_wait(2)
 
     yield drv
 
